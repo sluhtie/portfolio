@@ -1,21 +1,19 @@
 # Projekt-Screenshots
 
-Lege hier die **Full-Page-Screenshots** deiner Projekte ab. Erwartete Dateinamen
-(genau so, sonst greift der Gradient-Fallback):
+Full-Page-Screenshots der Projekte (als **WebP**, ~1600px breit, q80).
+Erwartete Dateinamen (genau so, sonst greift der Gradient-Fallback):
 
 | Projekt           | Datei                |
 | ----------------- | -------------------- |
-| Orbt              | `orbt.png`           |
-| Inselteam Usedom  | `ihreferien.png`     |
-| Beeograph         | `beeograph.png`      |
-| Rosenberger Event | `rosenberger.png`    |
+| Orbt              | `orbt.webp`          |
+| Inselteam Usedom  | `ihreferien.webp`    |
+| Beeograph         | `beeograph.webp`     |
+| Rosenberger Event | `rosenberger.webp`   |
 
-## Tipps
-- **Full-Page** aufnehmen (ganze Seite, nicht nur der sichtbare Teil).
-  Chrome DevTools → `Cmd+Shift+P` → „Capture full size screenshot".
-- Einheitliche Breite, z. B. **1440px** bei 2× Retina.
-- Für kleinere Dateien als **WebP** exportieren und in
-  `src/i18n/content.ts` die Endung `.png` → `.webp` ändern.
-- Sehr lange Seiten ggf. auf ~2500–3000px Höhe kürzen.
+## Bild austauschen / neu aufnehmen
+- **Full-Page** aufnehmen (ganze Seite): Chrome DevTools → `Cmd+Shift+P` →
+  „Capture full size screenshot" → ergibt ein PNG.
+- In WebP umwandeln (z. B. [squoosh.app](https://squoosh.app), Breite ~1600px)
+  und unter obigem Namen hier ablegen.
 
-Pfad wird in `src/i18n/content.ts` pro Projekt über das Feld `image` gesetzt.
+Pfade werden in `src/i18n/content.ts` pro Projekt über das Feld `image` gesetzt.

@@ -49,7 +49,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "Tailwind"],
     accent: "#ccff00",
     url: "https://orbt.gg",
-    image: "/projects/orbt.png",
+    image: "/projects/orbt.webp",
   },
   {
     id: "ihreferien",
@@ -64,7 +64,7 @@ export const projects: Project[] = [
     tags: ["Web Design", "Booking", "SEO"],
     accent: "#00e0c6",
     url: "https://ihreferien.de",
-    image: "/projects/ihreferien.png",
+    image: "/projects/ihreferien.webp",
   },
   {
     id: "beeograph",
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "SaaS"],
     accent: "#7c5cff",
     url: "https://beeograph.com",
-    image: "/projects/beeograph.png",
+    image: "/projects/beeograph.webp",
   },
   {
     id: "rosenberger",
@@ -94,7 +94,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "Branding", "Web Design"],
     accent: "#ff5d8f",
     url: "https://rosenberger-event.vercel.app",
-    image: "/projects/rosenberger.png",
+    image: "/projects/rosenberger.webp",
   },
 ];
 
