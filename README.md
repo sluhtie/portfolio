@@ -59,11 +59,13 @@ Den Aurora-Shader (Farben/Geschwindigkeit) findest du in
 
 ```
 src/
-  components/   wiederverwendbare Bausteine (Cursor, Magnetic, Reveal, Marquee, Navbar …)
+  components/   wiederverwendbare Bausteine (Magnetic, Reveal, Marquee, Navbar, ContactForm …)
   sections/     Seitenabschnitte (Hero, About, Services, Work, Process, Testimonials, Contact, Footer)
   i18n/         Sprachsystem + Inhalte
-  lib/          Smooth-Scroll, Hooks, Motion-Presets
+  lib/          Scroll-Helfer (nativ), Hooks, Motion-Presets
   index.css     Design-System
+api/
+  contact.ts    Vercel Serverless-Funktion — verschickt E-Mails via Resend
 ```
 
 ## Features
@@ -72,6 +74,26 @@ Preloader · Custom Cursor · magnetische Buttons · Masken-Text-Reveals ·
 Word-by-Word-Reveals · Scroll-Parallax · animierte Counter · gepinnte horizontale
 Galerie · Marquees · Akkordeon-Services · Testimonial-Slider · Scroll-Progress ·
 DE/EN-Umschalter · responsive · `prefers-reduced-motion`-freundlich.
+
+## Kontaktformular (Resend)
+
+Das Formular postet an die Serverless-Funktion `api/contact.ts`, die via
+[Resend](https://resend.com) **zwei** E-Mails verschickt: eine Benachrichtigung
+an dich (mit Reply-To = Absender) und eine gebrandete Eingangsbestätigung an den
+Absender (in dessen Sprache, DE/EN).
+
+**Einrichtung:**
+
+1. Resend-Account erstellen → **Domains** → `cwcodes.de` hinzufügen und die
+   angezeigten DNS-Einträge (SPF/DKIM) setzen, bis „Verified".
+2. **API Keys** → Key erstellen.
+3. In Vercel unter **Settings → Environment Variables** `RESEND_API_KEY`
+   hinterlegen (siehe `.env.example`). Re-deploy.
+
+Bis die Domain verifiziert ist, kann Resend nur an deine eigene Adresse senden.
+Lokal testen mit `vercel dev` (plain `npm run dev` kennt die `api/`-Funktion
+nicht → das Formular fällt dann auf `mailto:` zurück). Provider wechseln? Nur
+`api/contact.ts` anpassen.
 
 ## Barrierefreiheit / Performance
 

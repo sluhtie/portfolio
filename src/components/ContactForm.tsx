@@ -5,14 +5,12 @@ import { profile } from "../i18n/content";
 import { EASE } from "../lib/motion";
 
 /**
- * Form delivery endpoint. Default: FormSubmit (no backend, no signup) — it posts
- * straight to Connor's inbox. The FIRST submission triggers a one-time activation
- * email from FormSubmit; click the link once and the form is live.
- *
- * To swap providers, change this one line (e.g. a Web3Forms / Formspree URL or
- * your own API route). Set to "" to fall back to a mailto: link.
+ * Posts to our own Vercel serverless function (`/api/contact`), which sends a
+ * branded notification to Connor and a confirmation back to the sender via
+ * Resend. Set to "" to fall back to a mailto: link (e.g. for local `npm run dev`
+ * without `vercel dev`).
  */
-const FORM_ENDPOINT = `https://formsubmit.co/ajax/${profile.email}`;
+const FORM_ENDPOINT = "/api/contact";
 
 type Status = "idle" | "submitting" | "success" | "error";
 type Values = { name: string; email: string; subject: string; message: string };
@@ -21,7 +19,7 @@ type Errors = Partial<Record<keyof Values, string>>;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function ContactForm() {
-  const { t } = useLang();
+  const { t, locale } = useLang();
   const f = t.contact.form;
 
   const [values, setValues] = useState<Values>({
@@ -75,9 +73,8 @@ export function ContactForm() {
           email: values.email,
           subject: values.subject,
           message: values.message,
-          _subject: `CWCODES — ${values.subject || "Neue Anfrage"} (${values.name})`,
-          _template: "table",
-          _captcha: "false",
+          locale,
+          company: honey,
         }),
       });
       if (res.ok) {
