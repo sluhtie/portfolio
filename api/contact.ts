@@ -1,18 +1,19 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { Resend } from "resend";
 
 /**
- * Contact endpoint — sends two emails via Resend:
+ * Contact endpoint — sends two emails via Brevo's transactional API:
  *  1. a notification to Connor (reply-to = the sender, so a reply just works)
  *  2. a branded confirmation ("Eingangsbestätigung") back to the sender
  *
- * Required env: RESEND_API_KEY
- * Optional env: CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL
- * The FROM address must be on a domain verified in Resend (cwcodes.de).
+ * Required env: BREVO_API_KEY
+ * Optional env: CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL, CONTACT_FROM_NAME
+ * The FROM address must be a verified sender in Brevo (no domain purchase needed —
+ * just confirm the address via the link Brevo emails you).
  */
 
 const TO = process.env.CONTACT_TO_EMAIL || "connor@cwcodes.de";
-const FROM = process.env.CONTACT_FROM_EMAIL || "CWCODES <noreply@cwcodes.de>";
+const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || "connor@cwcodes.de";
+const FROM_NAME = process.env.CONTACT_FROM_NAME || "CWCODES";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -110,13 +111,43 @@ function confirmHtml(d: { name: string; message: string; locale: "de" | "en" }):
     </td></tr>`);
 }
 
+type BrevoContact = { email: string; name?: string };
+
+async function sendBrevo(opts: {
+  apiKey: string;
+  to: BrevoContact;
+  replyTo: BrevoContact;
+  subject: string;
+  html: string;
+}): Promise<void> {
+  const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      "api-key": opts.apiKey,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      sender: { name: FROM_NAME, email: FROM_EMAIL },
+      to: [opts.to],
+      replyTo: opts.replyTo,
+      subject: opts.subject,
+      htmlContent: opts.html,
+    }),
+  });
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "");
+    throw new Error(`Brevo ${res.status}: ${detail}`);
+  }
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: "Email service not configured" });
   }
@@ -147,20 +178,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: "Invalid input" });
   }
 
-  const resend = new Resend(apiKey);
-
   const [notify, confirm] = await Promise.allSettled([
-    resend.emails.send({
-      from: FROM,
-      to: TO,
-      replyTo: email,
+    sendBrevo({
+      apiKey,
+      to: { email: TO, name: "Connor Welge" },
+      replyTo: { email, name },
       subject: `Neue Anfrage über cwcodes.de — ${name}`,
       html: notifyHtml({ name, email, subject, message }),
     }),
-    resend.emails.send({
-      from: FROM,
-      to: email,
-      replyTo: TO,
+    sendBrevo({
+      apiKey,
+      to: { email, name },
+      replyTo: { email: TO, name: "Connor Welge" },
       subject:
         locale === "en"
           ? "Thanks for reaching out – CWCODES"
@@ -170,12 +199,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   ]);
 
   // The notification to Connor is the critical one.
-  if (notify.status === "rejected" || (notify.value && "error" in notify.value && notify.value.error)) {
-    console.error("contact: notification failed", notify);
-    return res.status(502).json({ error: "Could not send your message. Please email directly." });
+  if (notify.status === "rejected") {
+    console.error("contact: notification failed", notify.reason);
+    return res
+      .status(502)
+      .json({ error: "Could not send your message. Please email directly." });
   }
   if (confirm.status === "rejected") {
-    console.error("contact: confirmation failed (notification sent)", confirm);
+    console.error("contact: confirmation failed (notification sent)", confirm.reason);
   }
 
   return res.status(200).json({ ok: true });

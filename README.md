@@ -65,7 +65,7 @@ src/
   lib/          Scroll-Helfer (nativ), Hooks, Motion-Presets
   index.css     Design-System
 api/
-  contact.ts    Vercel Serverless-Funktion — verschickt E-Mails via Resend
+  contact.ts    Vercel Serverless-Funktion — verschickt E-Mails via Brevo
 ```
 
 ## Features
@@ -75,22 +75,26 @@ Word-by-Word-Reveals · Scroll-Parallax · animierte Counter · gepinnte horizon
 Galerie · Marquees · Akkordeon-Services · Testimonial-Slider · Scroll-Progress ·
 DE/EN-Umschalter · responsive · `prefers-reduced-motion`-freundlich.
 
-## Kontaktformular (Resend)
+## Kontaktformular (Brevo)
 
 Das Formular postet an die Serverless-Funktion `api/contact.ts`, die via
-[Resend](https://resend.com) **zwei** E-Mails verschickt: eine Benachrichtigung
+[Brevo](https://www.brevo.com) **zwei** E-Mails verschickt: eine Benachrichtigung
 an dich (mit Reply-To = Absender) und eine gebrandete Eingangsbestätigung an den
-Absender (in dessen Sprache, DE/EN).
+Absender (in dessen Sprache, DE/EN). Kostenlos bis 300 Mails/Tag, **keine eigene
+Domain nötig**.
 
 **Einrichtung:**
 
-1. Resend-Account erstellen → **Domains** → `cwcodes.de` hinzufügen und die
-   angezeigten DNS-Einträge (SPF/DKIM) setzen, bis „Verified".
-2. **API Keys** → Key erstellen.
-3. In Vercel unter **Settings → Environment Variables** `RESEND_API_KEY`
+1. [Brevo](https://www.brevo.com)-Account erstellen → **Senders, Domains &
+   Dedicated IPs → Senders** → `connor@cwcodes.de` als Absender hinzufügen und
+   per Klick-Link in der Bestätigungs-Mail verifizieren.
+2. **SMTP & API → API Keys** → Key generieren.
+3. In Vercel unter **Settings → Environment Variables** `BREVO_API_KEY`
    hinterlegen (siehe `.env.example`). Re-deploy.
 
-Bis die Domain verifiziert ist, kann Resend nur an deine eigene Adresse senden.
+Optional für bessere Zustellbarkeit (kostenlos, nur DNS): in Brevo unter
+**Domains** die DKIM/SPF-Records für `cwcodes.de` setzen.
+
 Lokal testen mit `vercel dev` (plain `npm run dev` kennt die `api/`-Funktion
 nicht → das Formular fällt dann auf `mailto:` zurück). Provider wechseln? Nur
 `api/contact.ts` anpassen.
