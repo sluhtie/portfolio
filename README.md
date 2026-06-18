@@ -65,7 +65,11 @@ src/
   lib/          Scroll-Helfer (nativ), Hooks, Motion-Presets
   index.css     Design-System
 api/
-  contact.ts    Vercel Serverless-Funktion — verschickt E-Mails via Brevo
+  contact.ts    Vercel Serverless-Funktion (dünner Wrapper um server/contact.js)
+server/
+  contact.js    geteilte Kontakt-/Brevo-Logik (Vercel UND Docker nutzen sie)
+  index.js      Express-Server: liefert dist/ + /api/contact (für Docker/Dokploy)
+Dockerfile · docker-compose.yml   Self-Hosting
 ```
 
 ## Features
@@ -98,6 +102,31 @@ Optional für bessere Zustellbarkeit (kostenlos, nur DNS): in Brevo unter
 Lokal testen mit `vercel dev` (plain `npm run dev` kennt die `api/`-Funktion
 nicht → das Formular fällt dann auf `mailto:` zurück). Provider wechseln? Nur
 `api/contact.ts` anpassen.
+
+## Self-Hosting (Docker / Dokploy)
+
+Statt Vercel kann die Seite als **ein** Container laufen: ein schlanker
+Express-Server (`server/index.js`) liefert das gebaute Frontend **und** die
+Kontakt-API (`/api/contact`) auf demselben Port. Die Brevo-Logik
+(`server/contact.js`) ist dieselbe wie bei Vercel.
+
+```bash
+# Lokal bauen & starten
+docker compose up --build
+# → http://localhost:3000
+```
+
+**Auf Dokploy:**
+
+1. Neue **Application** anlegen → Source: dein GitHub-Repo (`sluhtie/portfolio`),
+   Build Type: **Dockerfile**.
+2. **Port** auf `3000` setzen.
+3. **Environment Variables**: `BREVO_API_KEY` (Pflicht), optional
+   `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` / `CONTACT_FROM_NAME`.
+4. **Domain** `cwcodes.de` zuweisen — Dokploy/Traefik übernimmt HTTPS.
+5. Deploy. Health-Check läuft gegen `/api/health`.
+
+(Alternativ den „Compose"-Typ mit `docker-compose.yml` nutzen.)
 
 ## Barrierefreiheit / Performance
 

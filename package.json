@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server/index.js"
   },
   "dependencies": {
+    "express": "^4.22.2",
     "framer-motion": "^11.11.17",
     "gsap": "^3.12.5",
     "react": "^18.3.1",

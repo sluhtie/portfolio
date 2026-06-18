@@ -1,0 +1,20 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      # Set in Dokploy's environment settings (or a local .env file):
+      BREVO_API_KEY: ${BREVO_API_KEY}
+      CONTACT_TO_EMAIL: ${CONTACT_TO_EMAIL:-connor@cwcodes.de}
+      CONTACT_FROM_EMAIL: ${CONTACT_FROM_EMAIL:-connor@cwcodes.de}
+      CONTACT_FROM_NAME: ${CONTACT_FROM_NAME:-CWCODES}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
