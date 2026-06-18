@@ -1,14 +1,17 @@
 /**
- * Shared contact logic — used by BOTH the Vercel function (api/contact.ts) and
- * the Express server (server/index.js). Framework-agnostic: takes a parsed body,
- * returns { status, body }. Sends two emails via Brevo's transactional API.
+ * Shared contact logic for the Express server (server/index.js).
+ * Framework-agnostic: takes a parsed body, returns { status, body }.
+ * Sends two emails via useSend (self-hosted Resend alternative).
  *
- * Env: BREVO_API_KEY (required), CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL, CONTACT_FROM_NAME
+ * Env: USESEND_API_KEY (required), USESEND_BASE_URL (your self-hosted instance,
+ * default https://app.usesend.com), CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL,
+ * CONTACT_FROM_NAME
  */
 
 const TO = process.env.CONTACT_TO_EMAIL || "connor@cwcodes.de";
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || "connor@cwcodes.de";
 const FROM_NAME = process.env.CONTACT_FROM_NAME || "CWCODES";
+const USESEND_BASE = (process.env.USESEND_BASE_URL || "https://app.usesend.com").replace(/\/+$/, "");
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -105,30 +108,29 @@ function confirmHtml(d) {
     </td></tr>`);
 }
 
-async function sendBrevo(apiKey, opts) {
-  const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+async function sendUseSend(apiKey, opts) {
+  const res = await fetch(`${USESEND_BASE}/api/v1/emails`, {
     method: "POST",
     headers: {
-      "api-key": apiKey,
+      Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
-      Accept: "application/json",
     },
     body: JSON.stringify({
-      sender: { name: FROM_NAME, email: FROM_EMAIL },
-      to: [opts.to],
+      from: `${FROM_NAME} <${FROM_EMAIL}>`,
+      to: opts.to,
       replyTo: opts.replyTo,
       subject: opts.subject,
-      htmlContent: opts.html,
+      html: opts.html,
     }),
   });
   if (!res.ok) {
     const detail = await res.text().catch(() => "");
-    throw new Error(`Brevo ${res.status}: ${detail}`);
+    throw new Error(`useSend ${res.status}: ${detail}`);
   }
 }
 
 export async function sendContactEmails(body) {
-  const apiKey = process.env.BREVO_API_KEY;
+  const apiKey = process.env.USESEND_API_KEY;
   if (!apiKey) {
     return { status: 500, body: { error: "Email service not configured" } };
   }
@@ -151,15 +153,15 @@ export async function sendContactEmails(body) {
   }
 
   const [notify, confirm] = await Promise.allSettled([
-    sendBrevo(apiKey, {
-      to: { email: TO, name: "Connor Welge" },
-      replyTo: { email, name },
+    sendUseSend(apiKey, {
+      to: TO,
+      replyTo: email,
       subject: `Neue Anfrage über cwcodes.de — ${name}`,
       html: notifyHtml({ name, email, subject, message }),
     }),
-    sendBrevo(apiKey, {
-      to: { email, name },
-      replyTo: { email: TO, name: "Connor Welge" },
+    sendUseSend(apiKey, {
+      to: email,
+      replyTo: TO,
       subject:
         locale === "en"
           ? "Thanks for reaching out – CWCODES"

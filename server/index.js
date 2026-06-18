@@ -14,7 +14,7 @@ app.use(express.json({ limit: "32kb" }));
 // Health check (handy for Docker / Dokploy)
 app.get("/api/health", (_req, res) => res.json({ ok: true }));
 
-// Contact form → Brevo
+// Contact form → useSend
 app.post("/api/contact", async (req, res) => {
   try {
     const { status, body } = await sendContactEmails(req.body || {});

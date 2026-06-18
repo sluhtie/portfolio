@@ -5,10 +5,10 @@ import { profile } from "../i18n/content";
 import { EASE } from "../lib/motion";
 
 /**
- * Posts to our own Vercel serverless function (`/api/contact`), which sends a
- * branded notification to Connor and a confirmation back to the sender via
- * Resend. Set to "" to fall back to a mailto: link (e.g. for local `npm run dev`
- * without `vercel dev`).
+ * Posts to `/api/contact`, handled by the Express server (server/index.js), which
+ * sends a branded notification to Connor and a confirmation back to the sender
+ * via useSend. Set to "" to fall back to a mailto: link (e.g. for local
+ * `npm run dev`, where only Vite runs and the API isn't available).
  */
 const FORM_ENDPOINT = "/api/contact";
 

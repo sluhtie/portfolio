@@ -64,51 +64,27 @@ src/
   i18n/         Sprachsystem + Inhalte
   lib/          Scroll-Helfer (nativ), Hooks, Motion-Presets
   index.css     Design-System
-api/
-  contact.ts    Vercel Serverless-Funktion (dünner Wrapper um server/contact.js)
 server/
-  contact.js    geteilte Kontakt-/Brevo-Logik (Vercel UND Docker nutzen sie)
-  index.js      Express-Server: liefert dist/ + /api/contact (für Docker/Dokploy)
-Dockerfile · docker-compose.yml   Self-Hosting
+  contact.js    Kontakt-/E-Mail-Logik (useSend)
+  index.js      Express-Server: liefert dist/ + /api/contact + /api/health
+Dockerfile · docker-compose.yml   Self-Hosting (Docker / Dokploy)
 ```
 
 ## Features
 
-Preloader · Custom Cursor · magnetische Buttons · Masken-Text-Reveals ·
+Preloader · magnetische Buttons · Masken-Text-Reveals ·
 Word-by-Word-Reveals · Scroll-Parallax · animierte Counter · gepinnte horizontale
 Galerie · Marquees · Akkordeon-Services · Testimonial-Slider · Scroll-Progress ·
 DE/EN-Umschalter · responsive · `prefers-reduced-motion`-freundlich.
 
-## Kontaktformular (Brevo)
-
-Das Formular postet an die Serverless-Funktion `api/contact.ts`, die via
-[Brevo](https://www.brevo.com) **zwei** E-Mails verschickt: eine Benachrichtigung
-an dich (mit Reply-To = Absender) und eine gebrandete Eingangsbestätigung an den
-Absender (in dessen Sprache, DE/EN). Kostenlos bis 300 Mails/Tag, **keine eigene
-Domain nötig**.
-
-**Einrichtung:**
-
-1. [Brevo](https://www.brevo.com)-Account erstellen → **Senders, Domains &
-   Dedicated IPs → Senders** → `connor@cwcodes.de` als Absender hinzufügen und
-   per Klick-Link in der Bestätigungs-Mail verifizieren.
-2. **SMTP & API → API Keys** → Key generieren.
-3. In Vercel unter **Settings → Environment Variables** `BREVO_API_KEY`
-   hinterlegen (siehe `.env.example`). Re-deploy.
-
-Optional für bessere Zustellbarkeit (kostenlos, nur DNS): in Brevo unter
-**Domains** die DKIM/SPF-Records für `cwcodes.de` setzen.
-
-Lokal testen mit `vercel dev` (plain `npm run dev` kennt die `api/`-Funktion
-nicht → das Formular fällt dann auf `mailto:` zurück). Provider wechseln? Nur
-`api/contact.ts` anpassen.
-
 ## Self-Hosting (Docker / Dokploy)
 
-Statt Vercel kann die Seite als **ein** Container laufen: ein schlanker
-Express-Server (`server/index.js`) liefert das gebaute Frontend **und** die
-Kontakt-API (`/api/contact`) auf demselben Port. Die Brevo-Logik
-(`server/contact.js`) ist dieselbe wie bei Vercel.
+Die Seite läuft als **ein** Container: ein schlanker Express-Server
+(`server/index.js`) liefert das gebaute Frontend **und** die Kontakt-API
+(`/api/contact`) auf demselben Port. Das Formular verschickt über
+[useSend](https://usesend.com) (selfhosted Resend-Alternative) **zwei** E-Mails:
+eine Benachrichtigung an dich (Reply-To = Absender) und eine gebrandete
+Eingangsbestätigung an den Absender (in dessen Sprache, DE/EN).
 
 ```bash
 # Lokal bauen & starten
@@ -121,12 +97,16 @@ docker compose up --build
 1. Neue **Application** anlegen → Source: dein GitHub-Repo (`sluhtie/portfolio`),
    Build Type: **Dockerfile**.
 2. **Port** auf `3000` setzen.
-3. **Environment Variables**: `BREVO_API_KEY` (Pflicht), optional
-   `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` / `CONTACT_FROM_NAME`.
+3. **Environment Variables**: `USESEND_API_KEY` (Pflicht), `USESEND_BASE_URL`
+   (deine useSend-Instanz, z. B. `https://send.cwcodes.de`), optional
+   `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` / `CONTACT_FROM_NAME` (siehe `.env.example`).
 4. **Domain** `cwcodes.de` zuweisen — Dokploy/Traefik übernimmt HTTPS.
 5. Deploy. Health-Check läuft gegen `/api/health`.
 
 (Alternativ den „Compose"-Typ mit `docker-compose.yml` nutzen.)
+
+> Absender-Domain (`cwcodes.de`) in useSend verifizieren (DKIM/SPF-DNS-Records),
+> damit die Mails nicht im Spam landen.
 
 ## Barrierefreiheit / Performance
 
