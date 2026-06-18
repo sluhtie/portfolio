@@ -1,3 +1,7 @@
+# Primär für LOKALES Testen gedacht: `docker compose up --build` → localhost:3000.
+# Auf Dokploy lieber den "Application"-Typ mit der Dockerfile nutzen (Dokploy
+# übernimmt dann Routing, HTTPS, Env & Health-Check automatisch — kein Host-Port-
+# Mapping / keine Traefik-Labels nötig).
 services:
   web:
     build: .
