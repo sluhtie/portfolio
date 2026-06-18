@@ -5,6 +5,11 @@ export type Locale = "en" | "de";
 
 export const translations = {
   en: {
+    meta: {
+      title: "Connor Welge – Creative Developer & Designer in Hamburg | CWCODES",
+      description:
+        "CWCODES – Connor Welge builds modern, high-end websites & digital experiences for businesses and brands. Freelance web development & design from Hamburg.",
+    },
     nav: {
       work: "Work",
       about: "About",
@@ -94,6 +99,11 @@ export const translations = {
   },
 
   de: {
+    meta: {
+      title: "Connor Welge – Webentwickler & Designer aus Hamburg | CWCODES",
+      description:
+        "CWCODES – Connor Welge gestaltet moderne, hochwertige Websites & digitale Erlebnisse für Unternehmen und Marken. Freelance Webentwicklung & Webdesign aus Hamburg.",
+    },
     nav: {
       work: "Arbeiten",
       about: "Über mich",

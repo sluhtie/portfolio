@@ -1,35 +1,120 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <title>CWCODES — Connor Welge · Creative Developer & Designer</title>
+    <title>Connor Welge – Webentwickler & Designer aus Hamburg | CWCODES</title>
     <meta
       name="description"
-      content="CWCODES — Connor Welge, creative developer & designer from Hamburg, building immersive, high-end websites and digital products."
+      content="CWCODES – Connor Welge gestaltet moderne, hochwertige Websites & digitale Erlebnisse für Unternehmen und Marken. Freelance Webentwicklung & Webdesign aus Hamburg."
     />
+    <link rel="canonical" href="https://cwcodes.de/" />
+    <meta name="author" content="Connor Welge" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="theme-color" content="#08070a" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://cwcodes.de" />
-    <meta property="og:title" content="CWCODES — Connor Welge · Creative Developer & Designer" />
+    <meta property="og:site_name" content="CWCODES" />
+    <meta property="og:url" content="https://cwcodes.de/" />
+    <meta property="og:title" content="Connor Welge – Webentwickler & Designer aus Hamburg | CWCODES" />
     <meta
       property="og:description"
-      content="Creative developer & designer from Hamburg, building immersive, high-end websites and digital products."
+      content="Moderne, hochwertige Websites & digitale Erlebnisse für Unternehmen und Marken. Freelance Webentwicklung & Webdesign aus Hamburg."
     />
+    <meta property="og:image" content="https://cwcodes.de/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CWCODES – Connor Welge, Creative Developer & Designer" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@_sluhtie" />
+    <meta name="twitter:creator" content="@_sluhtie" />
+    <meta name="twitter:title" content="Connor Welge – Webentwickler & Designer aus Hamburg | CWCODES" />
+    <meta
+      name="twitter:description"
+      content="Moderne, hochwertige Websites & digitale Erlebnisse für Unternehmen und Marken. Aus Hamburg."
+    />
+    <meta name="twitter:image" content="https://cwcodes.de/og-image.png" />
 
     <!-- Fonts (Fontshare) -->
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600&f[]=gambetta@400,401,500&display=swap"
     />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://cwcodes.de/#connor",
+            "name": "Connor Welge",
+            "alternateName": "CWCODES",
+            "url": "https://cwcodes.de/",
+            "image": "https://cwcodes.de/og-image.png",
+            "jobTitle": "Creative Developer & Designer",
+            "email": "mailto:connor@cwcodes.de",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Hamburg",
+              "addressCountry": "DE"
+            },
+            "knowsAbout": [
+              "Webentwicklung",
+              "Webdesign",
+              "React",
+              "TypeScript",
+              "UI/UX Design",
+              "Creative Development"
+            ],
+            "sameAs": [
+              "https://github.com/sluhtie",
+              "https://instagram.com/connorhmb_",
+              "https://x.com/_sluhtie"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://cwcodes.de/#website",
+            "name": "CWCODES — Connor Welge",
+            "url": "https://cwcodes.de/",
+            "inLanguage": ["de", "en"],
+            "publisher": { "@id": "https://cwcodes.de/#connor" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="max-width: 640px; margin: 12vh auto; padding: 0 24px; font-family: system-ui, sans-serif; color: #ecebe4; background: #08070a;">
+        <h1>Connor Welge — Creative Developer &amp; Designer</h1>
+        <p>
+          CWCODES — moderne, hochwertige Websites und digitale Erlebnisse für
+          Unternehmen und Marken. Freelance Webentwicklung &amp; Webdesign aus
+          Hamburg.
+        </p>
+        <p>
+          Kontakt: <a style="color: #ccff00" href="mailto:connor@cwcodes.de">connor@cwcodes.de</a>
+        </p>
+        <p>Bitte aktiviere JavaScript, um die vollständige Seite zu sehen.</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

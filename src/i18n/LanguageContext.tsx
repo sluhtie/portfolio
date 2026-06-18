@@ -33,6 +33,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = locale;
     window.localStorage.setItem(STORAGE_KEY, locale);
+
+    // Keep the document title + meta description in sync with the language.
+    const meta = translations[locale].meta;
+    document.title = meta.title;
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute("content", meta.description);
   }, [locale]);
 
   const setLocale = (l: Locale) => setLocaleState(l);

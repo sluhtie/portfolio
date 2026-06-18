@@ -1,0 +1,15 @@
+{
+  "name": "CWCODES — Connor Welge",
+  "short_name": "CWCODES",
+  "description": "Creative Developer & Designer aus Hamburg — moderne, hochwertige Websites & digitale Erlebnisse.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08070a",
+  "theme_color": "#08070a",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" },
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
