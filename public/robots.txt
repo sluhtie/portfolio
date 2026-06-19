@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cwcodes.de/sitemap.xml
+Sitemap: https://www.cwcodes.de/sitemap.xml

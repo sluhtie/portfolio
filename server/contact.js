@@ -49,7 +49,7 @@ function shell(inner) {
         <tr><td style="padding:20px 32px 30px 32px;border-top:1px solid ${BRAND.line};">
           <p style="margin:0;font-size:12px;line-height:1.6;color:${BRAND.muted};">
             Connor Welge · CWCODES · Hamburg<br>
-            <a href="mailto:${TO}" style="color:${BRAND.muted};">${TO}</a> · <a href="https://cwcodes.de" style="color:${BRAND.muted};">cwcodes.de</a>
+            <a href="mailto:${TO}" style="color:${BRAND.muted};">${TO}</a> · <a href="https://www.cwcodes.de" style="color:${BRAND.muted};">cwcodes.de</a>
           </p>
         </td></tr>
       </table>
