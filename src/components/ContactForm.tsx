@@ -80,6 +80,7 @@ export function ContactForm() {
       if (res.ok) {
         setStatus("success");
         setValues({ name: "", email: "", subject: "", message: "" });
+        window.umami?.track("contact-submit");
       } else {
         setStatus("error");
       }
