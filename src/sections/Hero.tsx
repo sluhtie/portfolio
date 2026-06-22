@@ -122,10 +122,8 @@ export function Hero({ ready }: { ready: boolean }) {
                   d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"
                 />
               </defs>
-              <text fontSize="8.5" letterSpacing="2.4" fill="currentColor">
-                <textPath href="#circlePath">
-                  {`${t.hero.scroll} • ${t.hero.scroll} • `}
-                </textPath>
+              <text fontSize="8" letterSpacing="3.4" fill="currentColor">
+                <textPath href="#circlePath">{`${t.hero.scroll} •`}</textPath>
               </text>
             </svg>
             <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-accent transition-colors group-hover:border-accent">
