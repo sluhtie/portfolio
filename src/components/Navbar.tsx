@@ -87,15 +87,19 @@ export function Navbar({ ready }: { ready: boolean }) {
             {/* Right side */}
             <div className="flex items-center gap-3">
               <LanguageToggle />
-              <Magnetic className="hidden sm:inline-flex" strength={0.4}>
-                <button
-                  data-cursor
-                  onClick={() => go("contact")}
-                  className="btn-primary !py-2.5 !px-5 text-sm"
-                >
-                  {t.nav.cta}
-                </button>
-              </Magnetic>
+              {/* hidden on mobile (burger menu covers contact). Wrapper handles
+                  the hiding because Magnetic forces display:inline-flex inline. */}
+              <div className="hidden sm:block">
+                <Magnetic strength={0.4}>
+                  <button
+                    data-cursor
+                    onClick={() => go("contact")}
+                    className="btn-primary !py-2.5 !px-5 text-sm"
+                  >
+                    {t.nav.cta}
+                  </button>
+                </Magnetic>
+              </div>
 
               {/* Mobile burger */}
               <button

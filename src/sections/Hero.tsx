@@ -36,7 +36,7 @@ export function Hero({ ready }: { ready: boolean }) {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden"
     >
       <AuroraBackground intensity={1} />
 
@@ -49,50 +49,54 @@ export function Hero({ ready }: { ready: boolean }) {
         }}
       />
 
-      {/* top meta row */}
-      <motion.div
-        className="container-x absolute inset-x-0 top-24 flex items-center justify-between text-sm"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: ready ? 1 : 0 }}
-        transition={{ duration: 1, delay: 0.6 }}
-      >
-        <span className="flex items-center gap-2 text-muted">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-          </span>
-          {tx(profile.available)}
-        </span>
-        <span className="hidden text-muted sm:block">{t.hero.basedIn}</span>
-      </motion.div>
-
-      {/* headline + footer content */}
-      <div className="container-x relative z-10 pb-14 md:pb-20">
-        <motion.span
-          className="eyebrow mb-6 block"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: ready ? 1 : 0, y: ready ? 0 : 20 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+      {/* content: meta (top) · headline (centered) · intro + badge (bottom) */}
+      <div className="container-x relative z-10 flex flex-1 flex-col pt-28 pb-12 md:pb-16">
+        {/* top meta row */}
+        <motion.div
+          className="flex items-center justify-between text-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: ready ? 1 : 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
         >
-          {t.hero.eyebrow}
-        </motion.span>
-
-        <h1 className="font-display text-[clamp(2.8rem,11vw,11rem)] font-semibold leading-[0.92]">
-          <MaskedLine ready={ready} delay={0.45}>
-            {t.hero.lineOne}
-          </MaskedLine>
-          <MaskedLine ready={ready} delay={0.55} className="gradient-text">
-            {t.hero.lineTwo}
-          </MaskedLine>
-          <MaskedLine ready={ready} delay={0.65}>
-            <span className="inline-flex items-baseline gap-3">
-              {t.hero.lineThree}
-              <span className="font-serif text-accent text-[0.4em] italic">®</span>
+          <span className="flex items-center gap-2 text-muted">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-          </MaskedLine>
-        </h1>
+            {tx(profile.available)}
+          </span>
+          <span className="hidden text-muted sm:block">{t.hero.basedIn}</span>
+        </motion.div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+        {/* headline — vertically centered in the remaining space */}
+        <div className="flex flex-1 flex-col justify-center py-8">
+          <motion.span
+            className="eyebrow mb-6 block"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: ready ? 1 : 0, y: ready ? 0 : 20 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            {t.hero.eyebrow}
+          </motion.span>
+
+          <h1 className="font-display text-[clamp(2.8rem,11vw,11rem)] font-semibold leading-[0.92]">
+            <MaskedLine ready={ready} delay={0.45}>
+              {t.hero.lineOne}
+            </MaskedLine>
+            <MaskedLine ready={ready} delay={0.55} className="gradient-text">
+              {t.hero.lineTwo}
+            </MaskedLine>
+            <MaskedLine ready={ready} delay={0.65}>
+              <span className="inline-flex items-baseline gap-3">
+                {t.hero.lineThree}
+                <span className="font-serif text-accent text-[0.4em] italic">®</span>
+              </span>
+            </MaskedLine>
+          </h1>
+        </div>
+
+        {/* intro + scroll badge */}
+        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <motion.p
             className="max-w-md text-balance text-base text-muted md:text-lg"
             initial={{ opacity: 0, y: 24 }}
