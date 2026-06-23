@@ -93,7 +93,7 @@ export const projects: Project[] = [
     },
     tags: ["Next.js", "Branding", "Web Design"],
     accent: "#ff5d8f",
-    url: "https://rosenberger-event.vercel.app",
+    url: "http://websites-rosenbergereventde-sagh25-9bdec9-5-231-47-146.sslip.io/",
     image: "/projects/rosenberger.webp",
   },
 ];
