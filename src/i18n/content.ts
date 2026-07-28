@@ -93,7 +93,7 @@ export const projects: Project[] = [
     },
     tags: ["Next.js", "Branding", "Web Design"],
     accent: "#ff5d8f",
-    url: "http://websites-rosenbergereventde-sagh25-9bdec9-5-231-47-146.sslip.io/",
+    url: "https://rosenberger-event.cwcodes.de/",
     image: "/projects/rosenberger.webp",
   },
 ];
