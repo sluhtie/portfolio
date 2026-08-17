@@ -93,7 +93,7 @@ export const projects: Project[] = [
     },
     tags: ["Next.js", "Branding", "Web Design"],
     accent: "#ff5d8f",
-    url: "https://rosenberger-event.cwcodes.de/",
+    url: "https://rosenberger-event.de/",
     image: "/projects/rosenberger.webp",
   },
 ];
