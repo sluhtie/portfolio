@@ -68,15 +68,7 @@ export function Hero({ ready }: { ready: boolean }) {
             <span className="gradient-text">{t.hero.lineTwo}</span>
           </MaskedLine>
           <MaskedLine ready={ready} delay={0.65}>
-            <span className="relative inline-block">
-              {t.hero.lineThree}
-              <span
-                aria-hidden="true"
-                className="absolute bottom-[0.2em] left-full ml-[0.15em] font-serif text-[0.25em] italic text-accent"
-              >
-                ®
-              </span>
-            </span>
+            {t.hero.lineThree}
           </MaskedLine>
         </h1>
         <motion.p
