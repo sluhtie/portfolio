@@ -12,7 +12,6 @@ import { About } from "./sections/About";
 import { Services } from "./sections/Services";
 import { Work } from "./sections/Work";
 import { Process } from "./sections/Process";
-import { Testimonials } from "./sections/Testimonials";
 import { Contact } from "./sections/Contact";
 import { Footer } from "./sections/Footer";
 
@@ -59,7 +58,6 @@ export default function App() {
         <Services />
         <Work />
         <Process />
-        <Testimonials />
         <Contact />
       </main>
 

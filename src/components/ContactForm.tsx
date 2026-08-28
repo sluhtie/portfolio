@@ -21,6 +21,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export function ContactForm() {
   const { t, locale } = useLang();
   const f = t.contact.form;
+  const linkedIn = profile.socials.find((social) => social.label === "LinkedIn");
 
   const [values, setValues] = useState<Values>({
     name: "",
@@ -208,6 +209,19 @@ export function ContactForm() {
           </motion.form>
         )}
       </AnimatePresence>
+      {linkedIn && (
+        <p className="mt-5 text-center text-sm text-muted">
+          <a
+            href={linkedIn.href}
+            target="_blank"
+            rel="noreferrer"
+            className="link-underline inline-flex items-center gap-2 transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            {f.linkedIn}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </p>
+      )}
     </div>
   );
 }

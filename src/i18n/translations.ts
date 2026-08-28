@@ -48,6 +48,7 @@ export const translations = {
       subheading: "A few things I'm proud of. Hover to take a look.",
       view: "View project",
       all: "See all projects",
+      status: { live: "Live", inProgress: "In progress" },
     },
     process: {
       eyebrow: "How we'll work",
@@ -76,6 +77,7 @@ export const translations = {
         message: "Message",
         messagePlaceholder: "Tell me a little about your project…",
         submit: "Send message",
+        linkedIn: "Or message me on LinkedIn",
         sending: "Sending…",
         successTitle: "Message sent — thank you!",
         successBody: "I'll get back to you within 1–2 working days.",
@@ -142,6 +144,7 @@ export const translations = {
       subheading: "Ein paar Dinge, auf die ich stolz bin. Hover für einen Blick.",
       view: "Projekt ansehen",
       all: "Alle Projekte",
+      status: { live: "Live", inProgress: "In Arbeit" },
     },
     process: {
       eyebrow: "Wie wir arbeiten",
@@ -170,6 +173,7 @@ export const translations = {
         message: "Nachricht",
         messagePlaceholder: "Erzähl mir kurz von deinem Projekt…",
         submit: "Nachricht senden",
+        linkedIn: "Oder schreib mir auf LinkedIn",
         sending: "Wird gesendet…",
         successTitle: "Nachricht gesendet — danke!",
         successBody: "Ich melde mich innerhalb von 1–2 Werktagen bei dir.",

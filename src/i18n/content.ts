@@ -16,6 +16,7 @@ export const profile = {
   available: { en: "Available for projects", de: "Verfügbar für Projekte" },
   socials: [
     { label: "GitHub", href: "https://github.com/sluhtie" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/connor-welge-3a211b3b6/" },
     { label: "Instagram", href: "https://instagram.com/connorhmb_" },
     { label: "X", href: "https://x.com/_sluhtie" },
   ],
@@ -25,13 +26,13 @@ export type Project = {
   id: string;
   index: string;
   title: string;
-  year: string;
+  status: "live" | "inProgress";
   category: { en: string; de: string };
   description: { en: string; de: string };
   tags: string[];
   accent: string;
   url: string;
-  /** Full-page screenshot in /public/projects/. Empty string → gradient fallback. */
+  /** Website screenshot in /public/projects/. Empty string → gradient fallback. */
   image: string;
 };
 
@@ -40,11 +41,11 @@ export const projects: Project[] = [
     id: "orbt",
     index: "01",
     title: "Orbt",
-    year: "2025",
-    category: { en: "Community Platform", de: "Community-Plattform" },
+    status: "live",
+    category: { en: "Discord Bot & Dashboard", de: "Discord-Bot & Dashboard" },
     description: {
-      en: "A polished community platform for creators and gaming communities — fluid motion, real-time presence and an interface that feels alive at every interaction.",
-      de: "Eine durchdesignte Community-Plattform für Creator und Gaming-Communities — flüssige Motion, Echtzeit-Präsenz und ein Interface, das bei jeder Interaktion lebendig wirkt.",
+      en: "A versatile Discord bot with a modern web dashboard. Orbt brings the features of many individual bots together in one system — without compromising on quality.",
+      de: "Ein vielseitiger Discord-Bot mit modernem Web-Dashboard. Orbt bündelt die Funktionen vieler einzelner Bots in einem System — ohne Abstriche bei der Qualität.",
     },
     tags: ["Next.js", "TypeScript", "Tailwind"],
     accent: "#ccff00",
@@ -55,7 +56,7 @@ export const projects: Project[] = [
     id: "ihreferien",
     index: "02",
     title: "Inselteam Usedom",
-    year: "2024",
+    status: "live",
     category: { en: "Hospitality & Booking", de: "Hospitality & Buchung" },
     description: {
       en: "A direct-booking site for a family-run holiday-rental business on the Baltic island of Usedom — warm, trustworthy and built to convert. Book your stay like among friends.",
@@ -70,7 +71,7 @@ export const projects: Project[] = [
     id: "beeograph",
     index: "03",
     title: "Beeograph",
-    year: "2025",
+    status: "live",
     category: { en: "Creator SaaS", de: "Creator-SaaS" },
     description: {
       en: "A link-in-bio alternative done right: live-updating creator profiles with real integrations, a drag-and-drop editor and analytics — entirely you, no template.",
@@ -85,7 +86,7 @@ export const projects: Project[] = [
     id: "rosenberger",
     index: "04",
     title: "Rosenberger Event",
-    year: "2024",
+    status: "live",
     category: { en: "Brand & Website", de: "Brand & Website" },
     description: {
       en: "A premium brand site for a Hamburg event-staffing agency — confident typography and calm motion that put the people behind the service front and centre.",
@@ -95,6 +96,21 @@ export const projects: Project[] = [
     accent: "#ff5d8f",
     url: "https://rosenberger-event.de/",
     image: "/projects/rosenberger.webp",
+  },
+  {
+    id: "strassburger-pflegedienst",
+    index: "05",
+    title: "Strassburger Pflegedienst",
+    status: "inProgress",
+    category: { en: "Healthcare & Website", de: "Pflege & Website" },
+    description: {
+      en: "A clear, welcoming website for a home care provider in Hamburg-Dulsberg — with easy-to-understand information about care services, the team and how to get in touch.",
+      de: "Eine übersichtliche Website für den ambulanten Pflegedienst aus Hamburg-Dulsberg — mit verständlichen Informationen zu Pflegeleistungen, Team und Kontakt.",
+    },
+    tags: ["Web Design", "Healthcare", "Responsive"],
+    accent: "#7da5df",
+    url: "https://strassburger-pflegedienst.cwcodes.de/",
+    image: "/projects/strassburger-pflegedienst.webp",
   },
 ];
 

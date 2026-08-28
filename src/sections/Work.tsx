@@ -23,18 +23,25 @@ function ProjectCard({ project }: { project: Project }) {
       href={project.url}
       target="_blank"
       rel="noreferrer"
-      aria-label={`${project.title} — ${t.work.view}`}
+      aria-label={`${project.title} — ${t.work.status[project.status]} — ${t.work.view}`}
       className="group relative flex h-full w-full shrink-0 flex-col overflow-hidden rounded-2xl border border-line bg-bg-soft transition-colors duration-500 hover:border-ink/25"
     >
       {/* browser bar */}
       <div className="flex items-center gap-2 border-b border-line px-4 py-3">
-        <span className="flex gap-1.5">
+        <span aria-hidden="true" className="flex shrink-0 gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
         </span>
-        <span className="ml-3 truncate text-xs text-muted">{hostnameOf(project.url)}</span>
-        <span className="ml-auto shrink-0 text-xs text-muted">{project.year}</span>
+        <span className="ml-3 min-w-0 flex-1 truncate text-xs text-muted">{hostnameOf(project.url)}</span>
+        <span
+          className={`ml-auto inline-flex shrink-0 items-center gap-1.5 text-xs ${
+            project.status === "live" ? "text-accent" : "text-amber-300"
+          }`}
+        >
+          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current" />
+          {t.work.status[project.status]}
+        </span>
       </div>
 
       {/* scrolling screenshot */}
@@ -48,7 +55,7 @@ function ProjectCard({ project }: { project: Project }) {
         />
         {project.image && (
           <div
-            className="absolute inset-0 bg-top bg-no-repeat bg-[length:100%_auto] transition-[background-position] duration-[5000ms] ease-linear group-hover:bg-bottom motion-reduce:transition-none motion-reduce:group-hover:bg-top"
+            className="absolute inset-0 bg-cover bg-top bg-no-repeat transition-[background-position] duration-[5000ms] ease-linear group-hover:bg-bottom motion-reduce:transition-none motion-reduce:group-hover:bg-top"
             style={{ backgroundImage: `url(${project.image})` }}
           />
         )}
@@ -68,11 +75,11 @@ function ProjectCard({ project }: { project: Project }) {
 
       {/* meta */}
       <div className="p-6 md:p-7">
-        <div className="flex items-baseline justify-between gap-4">
+        <div className="flex flex-col items-start gap-1.5">
           <h3 className="font-display text-2xl font-semibold md:text-3xl">
             {project.title}
           </h3>
-          <span className="shrink-0 text-xs text-muted">{tx(project.category)}</span>
+          <span className="text-xs text-muted">{tx(project.category)}</span>
         </div>
         <p className="mt-2 max-w-md text-sm text-muted">{tx(project.description)}</p>
         <ul className="mt-4 flex flex-wrap gap-2">
@@ -92,7 +99,8 @@ function ProjectCard({ project }: { project: Project }) {
 
 export function Work() {
   const { t } = useLang();
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  // Short windows need stacked cards to keep screenshots and copy visible.
+  const isDesktop = useMediaQuery("(min-width: 768px) and (min-height: 640px)");
   const pinRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -171,7 +179,7 @@ export function Work() {
       ) : (
         <div className="container-x mt-12 flex flex-col gap-6">
           {projects.map((p) => (
-            <div key={p.id} className="h-[78vh]">
+            <div key={p.id} className="h-[78svh] min-h-[34rem]">
               <ProjectCard project={p} />
             </div>
           ))}
