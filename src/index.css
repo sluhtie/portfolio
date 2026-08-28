@@ -173,6 +173,33 @@
 }
 
 /* ============================================================
+   HERO
+   ============================================================ */
+.hero-content {
+  gap: clamp(1.25rem, 3svh, 2rem);
+  padding-top: clamp(7rem, 14svh, 9rem);
+  padding-bottom: clamp(2rem, 5svh, 3rem);
+}
+
+.hero-title {
+  /* Keep all three lines in view on both narrow and short screens. */
+  font-size: clamp(2.625rem, min(11.5vw, 13svh), 9rem);
+}
+
+@media (max-height: 600px) and (min-width: 640px) {
+  .hero-content {
+    gap: 1rem;
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-scroll {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+/* ============================================================
    MARQUEE
    ============================================================ */
 @keyframes marquee-x {
