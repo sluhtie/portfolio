@@ -40,7 +40,7 @@ export function Reveal({
  * overflow-hidden mask with a stagger.
  *
  * IMPORTANT: the `whileInView` trigger lives on the OUTER container (which is
- * never transformed). The animated children sit ~110% lower until revealed, so
+ * never transformed). The animated children sit below the mask until revealed, so
  * if we observed them directly the IntersectionObserver would see them shifted
  * down and large headings would never cross the visibility threshold — leaving
  * the text stuck inside the mask.
@@ -75,14 +75,13 @@ export function RevealLines({
       {lines.map((line, i) => (
         <span key={i} className="reveal-line">
           <motion.span
-            className={lineClassName}
             style={{ display: "block" }}
             variants={{
-              hidden: { y: "110%" },
+              hidden: { y: "150%" },
               show: { y: "0%", transition: { duration: 1, ease: EASE } },
             }}
           >
-            {line}
+            <span className={lineClassName}>{line}</span>
           </motion.span>
         </span>
       ))}
@@ -119,19 +118,11 @@ export function RevealWords({
     >
       {words.map((word, i) => (
         <Fragment key={i}>
-          <span
-            style={{
-              display: "inline-block",
-              overflow: "hidden",
-              verticalAlign: "bottom",
-              paddingBottom: "0.12em",
-              marginBottom: "-0.12em",
-            }}
-          >
+          <span className="reveal-word">
             <motion.span
               style={{ display: "inline-block" }}
               variants={{
-                hidden: { y: "110%", opacity: 0 },
+                hidden: { y: "150%", opacity: 0 },
                 show: { y: "0%", opacity: 1, transition: { duration: 0.8, ease: EASE } },
               }}
             >

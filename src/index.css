@@ -123,12 +123,21 @@
     background: linear-gradient(120deg, var(--color-accent), var(--color-teal));
   }
 
-  /* Masked line reveal: wrap text in .reveal-line, child gets .reveal-line__inner */
+  /* Bleed around the mask protects descenders and italic overhangs. Negative
+     margins preserve the text's original alignment and line spacing. */
   .reveal-line {
     display: block;
     overflow: hidden;
-    padding-bottom: 0.14em;
-    margin-bottom: -0.14em;
+    padding: 0.12em 0.12em 0.3em;
+    margin: -0.12em -0.12em -0.3em;
+  }
+
+  .reveal-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding: 0.08em 0.08em 0.24em;
+    margin: -0.08em -0.08em -0.24em;
   }
 
   .eyebrow {
@@ -197,6 +206,28 @@
     width: 4rem;
     height: 4rem;
   }
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-heading {
+  container-type: inline-size;
+}
+
+.contact-title {
+  /* Scale with the actual text column, including its maximum width. */
+  font-size: clamp(1.75rem, 9.5cqi, 6rem);
+  line-height: 1.12;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.contact-title .gradient-text {
+  /* Inline paint follows each wrapped line; the inset also covers italics. */
+  padding-inline: 0.08em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* ============================================================

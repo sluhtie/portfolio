@@ -82,7 +82,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
             <h1 className="reveal-line text-[clamp(3rem,12vw,11rem)] font-semibold leading-none">
               <motion.span
                 className="block"
-                initial={{ y: "110%" }}
+                initial={{ y: "150%" }}
                 animate={{ y: "0%" }}
                 transition={{ duration: 1, ease: EASE, delay: 0.15 }}
               >

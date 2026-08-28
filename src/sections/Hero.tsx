@@ -19,8 +19,8 @@ function MaskedLine({
     <span className="reveal-line">
       <motion.span
         className={`block ${className}`}
-        initial={{ y: "110%" }}
-        animate={{ y: ready ? "0%" : "110%" }}
+        initial={{ y: "150%" }}
+        animate={{ y: ready ? "0%" : "150%" }}
         transition={{ duration: 1.1, ease: EASE, delay }}
       >
         {children}

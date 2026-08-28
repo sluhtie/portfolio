@@ -20,11 +20,11 @@ export function Contact() {
 
       <div className="container-x relative z-10">
         {/* heading */}
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="contact-heading mx-auto max-w-4xl text-center">
           <Reveal>
             <span className="eyebrow">{t.contact.eyebrow}</span>
           </Reveal>
-          <h2 className="mx-auto mt-8 font-display text-[clamp(2.4rem,8vw,7rem)] font-semibold leading-[0.95]">
+          <h2 className="contact-title mx-auto mt-8 font-display font-semibold">
             <RevealLines lines={[t.contact.heading]} />
             <RevealLines
               lines={[t.contact.headingAccent]}
