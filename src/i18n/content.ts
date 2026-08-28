@@ -117,73 +117,81 @@ export const projects: Project[] = [
 export const services = [
   {
     num: "01",
-    title: { en: "Creative Development", de: "Creative Development" },
+    title: { en: "Website Development", de: "Website-Entwicklung" },
     body: {
-      en: "I build fast, accessible front-ends with motion baked in — React, TypeScript, WebGL. The kind of site that makes people scroll twice.",
-      de: "Ich baue schnelle, barrierefreie Frontends mit Motion im Kern — React, TypeScript, WebGL. Die Art Website, bei der man zweimal scrollt.",
+      en: "I build custom websites, usually with Next.js, React and TypeScript. From the layout to the features your project needs, I turn the concept into a working website that fits phones, tablets and desktops.",
+      de: "Ich entwickle individuelle Websites, in der Regel mit Next.js, React und TypeScript. Vom Layout bis zu den Funktionen, die dein Projekt braucht: Aus dem Konzept wird eine Website, die auf Smartphone, Tablet und Desktop passt.",
     },
-    skills: ["React / Next.js", "TypeScript", "GSAP / Framer Motion", "WebGL / Shaders"],
+    skills: ["Next.js", "React", "TypeScript", "Responsive Design"],
   },
   {
     num: "02",
-    title: { en: "UI / UX Design", de: "UI / UX Design" },
+    title: { en: "Deployment & Operations", de: "Deployment & Betrieb" },
     body: {
-      en: "From wireframe to pixel-perfect interface. Design systems, prototypes and interactions that feel inevitable.",
-      de: "Vom Wireframe zum pixelgenauen Interface. Designsysteme, Prototypen und Interaktionen, die sich selbstverständlich anfühlen.",
+      en: "If you want me to handle the technical side, I take care of deployment, hosting, your domain, HTTPS and secure configuration. You have one point of contact for both development and operations.",
+      de: "Auf Wunsch kümmere ich mich auch um die Technik hinter deiner Website: Deployment, Hosting, Domain, HTTPS und eine sichere Konfiguration. So hast du für Entwicklung und Betrieb einen Ansprechpartner.",
     },
-    skills: ["Figma", "Design Systems", "Prototyping", "Interaction Design"],
+    skills: ["DevOps", "Deployment", "Hosting", "Domains & DNS", "HTTPS"],
   },
   {
     num: "03",
-    title: { en: "Brand & Art Direction", de: "Brand & Art Direction" },
+    title: { en: "UI/UX & Concepts", de: "UI/UX & Konzept" },
     body: {
-      en: "Identity that lives on screen. Type, color, motion language and a visual voice that scales across every touchpoint.",
-      de: "Identität, die auf dem Bildschirm lebt. Typo, Farbe, Motion-Sprache und eine visuelle Stimme, die über jeden Touchpoint skaliert.",
+      en: "Where useful, I sketch the structure and visual direction in Figma. Together, we work out how the website should look and feel to use. UI/UX supports my main focus: development.",
+      de: "Bei Bedarf skizziere ich Aufbau und Gestaltung in Figma. Gemeinsam stimmen wir ab, wie die Website aussehen und sich bedienen lassen soll. UI/UX ergänzt dabei meinen Schwerpunkt: die Entwicklung.",
     },
-    skills: ["Visual Identity", "Motion Language", "Typography", "Art Direction"],
+    skills: ["Figma", "Wireframes", "Prototyping", "UI/UX"],
   },
   {
     num: "04",
     title: { en: "Performance & Care", de: "Performance & Pflege" },
     body: {
-      en: "Beautiful is only half the job. I ship Core-Web-Vitals-green sites and stick around to keep them sharp.",
-      de: "Schön ist nur die halbe Miete. Ich liefere Core-Web-Vitals-grüne Seiten und bleibe dran, damit sie scharf bleiben.",
+      en: "I improve loading times and technical SEO to help your website load quickly and make it easier for search engines to understand. After launch, I can handle updates, security fixes, troubleshooting and further improvements, as agreed.",
+      de: "Ich optimiere Ladezeiten und technisches SEO, damit deine Website schnell lädt und von Suchmaschinen besser erfasst werden kann. Nach dem Launch übernehme ich nach Absprache Updates, Sicherheitsaktualisierungen, Fehlerbehebung und Weiterentwicklung.",
     },
-    skills: ["Core Web Vitals", "SEO", "Accessibility", "Maintenance"],
+    skills: ["SEO", "Core Web Vitals", "Updates", "Maintenance"],
   },
 ];
 
 export const processSteps = [
   {
     num: "01",
-    title: { en: "Discover", de: "Entdecken" },
+    title: { en: "Goals & Requirements", de: "Ziele & Wünsche" },
     body: {
-      en: "We dig into your goals, audience and what makes you different. No template thinking — every project starts blank.",
-      de: "Wir tauchen in deine Ziele, Zielgruppe und das ein, was dich besonders macht. Kein Template-Denken — jedes Projekt startet leer.",
+      en: "You tell me what you have in mind and what the website needs to do. We discuss content, features and any existing examples, then agree on the scope and priorities.",
+      de: "Du erzählst mir, was du dir vorstellst und was die Website können soll. Wir besprechen Inhalte, Funktionen und vorhandene Beispiele und stimmen gemeinsam Umfang und Prioritäten ab.",
     },
   },
   {
     num: "02",
-    title: { en: "Design", de: "Design" },
+    title: { en: "Concept & First Draft", de: "Konzept & Entwurf" },
     body: {
-      en: "Concepts, art direction and a motion language. You see the vibe early and we shape it together.",
-      de: "Konzepte, Art Direction und eine Motion-Sprache. Du siehst den Vibe früh, und wir formen ihn gemeinsam.",
+      en: "I put together an initial concept or sketch, using Figma where it helps. You see how the website could look and give feedback on the structure and design before we develop it further.",
+      de: "Ich erstelle ein erstes Konzept oder eine Skizze, bei Bedarf in Figma. Du siehst, wie die Website aussehen könnte, und gibst Feedback zu Aufbau und Gestaltung, bevor wir sie weiter ausarbeiten.",
     },
   },
   {
     num: "03",
-    title: { en: "Build", de: "Umsetzung" },
+    title: { en: "Build & Feedback", de: "Umsetzung & Feedback" },
     body: {
-      en: "Clean, performant code with every interaction crafted by hand. Weekly previews, no surprises.",
-      de: "Sauberer, performanter Code mit jeder Interaktion von Hand gebaut. Wöchentliche Previews, keine Überraschungen.",
+      en: "I build the website, usually with Next.js, and share previews along the way. You try it out, tell me what works and what needs adjusting, and we refine it together until the result fits the agreed goals.",
+      de: "Ich setze die Website meist mit Next.js um und zeige dir Zwischenstände. Du probierst sie aus und sagst, was passt und was noch geändert werden soll. Gemeinsam verfeinern wir das Ergebnis, bis es zu den vereinbarten Zielen passt.",
     },
   },
   {
     num: "04",
-    title: { en: "Launch", de: "Launch" },
+    title: { en: "SEO & Final Checks", de: "SEO & Feinschliff" },
     body: {
-      en: "We ship, measure and refine. Then I make sure it stays fast, secure and yours.",
-      de: "Wir gehen live, messen und verfeinern. Danach sorge ich dafür, dass alles schnell, sicher und deins bleibt.",
+      en: "Once the content and design are agreed, I refine technical SEO and loading performance. I also check the layout on different screen sizes and test the main features before delivery.",
+      de: "Wenn Inhalt und Gestaltung stehen, optimiere ich technisches SEO und Ladezeiten. Außerdem prüfe ich die Darstellung auf verschiedenen Bildschirmgrößen und teste die wichtigen Funktionen vor der Übergabe.",
+    },
+  },
+  {
+    num: "05",
+    title: { en: "Launch or Handover", de: "Onlinegang oder Übergabe" },
+    body: {
+      en: "You choose: I can handle deployment, your domain and the setup for running the website, or hand over the code and setup notes so you can manage it yourself. Ongoing maintenance and support are available by agreement.",
+      de: "Du entscheidest: Ich übernehme Deployment, Domain und die Einrichtung für den Betrieb – oder du erhältst den Code samt Hinweisen und kümmerst dich selbst darum. Wartung und weitere Betreuung sind nach Absprache möglich.",
     },
   },
 ];
@@ -223,12 +231,12 @@ export const testimonials = [
 ];
 
 export const marqueeWords = [
-  "Creative Development",
+  "Next.js",
+  "Web Development",
+  "Deployment",
+  "Domains & Hosting",
   "UI / UX",
-  "WebGL",
-  "Motion Design",
-  "Brand Identity",
-  "Art Direction",
-  "Interaction",
+  "SEO",
   "Performance",
+  "Maintenance",
 ];

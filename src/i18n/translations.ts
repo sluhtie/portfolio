@@ -40,7 +40,7 @@ export const translations = {
     services: {
       eyebrow: "What I do",
       heading: "Services",
-      subheading: "End-to-end, from the first sketch to the final deploy.",
+      subheading: "Your website and the technology behind it — from development to ongoing care.",
     },
     work: {
       eyebrow: "Selected work",
@@ -53,7 +53,7 @@ export const translations = {
     process: {
       eyebrow: "How we'll work",
       heading: "The process",
-      subheading: "Clear, collaborative and built for results.",
+      subheading: "From your ideas to a finished website, with your feedback at every step.",
     },
     testimonials: {
       eyebrow: "Kind words",
@@ -136,7 +136,7 @@ export const translations = {
     services: {
       eyebrow: "Was ich mache",
       heading: "Leistungen",
-      subheading: "End-to-end, von der ersten Skizze bis zum finalen Deploy.",
+      subheading: "Deine Website und die Technik dahinter – von der Entwicklung bis zur Betreuung.",
     },
     work: {
       eyebrow: "Ausgewählte Arbeiten",
@@ -149,7 +149,7 @@ export const translations = {
     process: {
       eyebrow: "Wie wir arbeiten",
       heading: "Der Prozess",
-      subheading: "Klar, kollaborativ und auf Ergebnisse ausgelegt.",
+      subheading: "Von deinen Wünschen zur fertigen Website – mit deinem Feedback bei jedem Schritt.",
     },
     testimonials: {
       eyebrow: "Nette Worte",
