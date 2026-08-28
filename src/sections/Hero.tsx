@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { useLang } from "../i18n/LanguageContext";
-import { profile } from "../i18n/content";
 import { AuroraBackground } from "../components/AuroraBackground";
 import { EASE } from "../lib/motion";
 import { scrollTo } from "../lib/scroll";
@@ -31,7 +30,7 @@ function MaskedLine({
 }
 
 export function Hero({ ready }: { ready: boolean }) {
-  const { t, tx } = useLang();
+  const { t } = useLang();
 
   return (
     <section
@@ -53,18 +52,11 @@ export function Hero({ ready }: { ready: boolean }) {
       <div className="container-x relative z-10 flex flex-1 flex-col pt-28 pb-12 md:pb-16">
         {/* top meta row */}
         <motion.div
-          className="flex items-center justify-between text-sm"
+          className="flex min-h-5 items-center justify-end text-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: ready ? 1 : 0 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          <span className="flex items-center gap-2 text-muted">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-            </span>
-            {tx(profile.available)}
-          </span>
           <span className="hidden text-muted sm:block">{t.hero.basedIn}</span>
         </motion.div>
 
