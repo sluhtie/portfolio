@@ -10,6 +10,8 @@ Erwartete Dateinamen (genau so, sonst greift der Gradient-Fallback):
 | Beeograph         | `beeograph.webp`     |
 | Rosenberger Event | `rosenberger.webp`   |
 | Strassburger Pflegedienst | `strassburger-pflegedienst.webp` |
+| DIZZY             | `dizzy.webp`         |
+| VeyloraSMP        | `veylorasmp.webp`    |
 
 Strassburger Pflegedienst nutzt vorerst einen Ausschnitt der Startseite. Die
 Vorschauen füllen ihre Bildfläche auch bei unterschiedlichen Seitenverhältnissen.

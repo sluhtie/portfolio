@@ -112,6 +112,36 @@ export const projects: Project[] = [
     url: "https://strassburger-pflegedienst.cwcodes.de/",
     image: "/projects/strassburger-pflegedienst.webp",
   },
+  {
+    id: "dizzy",
+    index: "06",
+    title: "DIZZY",
+    status: "inProgress",
+    category: { en: "Mobile App & Party Games", de: "Mobile-App & Partyspiele" },
+    description: {
+      en: "A cross-platform party-game app for iOS and Android with ten games — from Imposter and Truth or Dare to fast-paced challenges. Built for spontaneous rounds on one phone or across multiple devices, with no account required.",
+      de: "Eine plattformübergreifende Partyspiel-App für iOS und Android mit zehn Spielen — von Imposter und Wahrheit oder Pflicht bis zu schnellen Challenges. Für spontane Runden auf einem Handy oder geräteübergreifend, ganz ohne Account.",
+    },
+    tags: ["Expo", "React Native", "TypeScript"],
+    accent: "#ffdc4a",
+    url: "https://dizzy.cwcodes.de/",
+    image: "/projects/dizzy.webp",
+  },
+  {
+    id: "veylorasmp",
+    index: "07",
+    title: "VeyloraSMP",
+    status: "live",
+    category: { en: "Gaming Community & Platform", de: "Gaming-Community & Plattform" },
+    description: {
+      en: "A feature-rich Minecraft Survival Multiplayer world with protected claims, player groups, farm worlds, a player-driven economy, proximity voice, events, rankings, an interactive map and a comprehensive wiki.",
+      de: "Ein feature-reiches Minecraft-Survival-Multiplayer-Projekt mit geschützten Claims, Gruppen, Farmwelten, Spielerwirtschaft, Proximity Voice, Events, Ranglisten, interaktiver Karte und umfangreichem Wiki.",
+    },
+    tags: ["Minecraft", "Survival SMP", "Community Platform"],
+    accent: "#6865ff",
+    url: "https://veylorasmp.net/",
+    image: "/projects/veylorasmp.webp",
+  },
 ];
 
 export const services = [
