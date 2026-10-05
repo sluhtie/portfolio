@@ -13,8 +13,7 @@ Erwartete Dateinamen (genau so, sonst greift der Gradient-Fallback):
 | DIZZY             | `dizzy.webp`         |
 | VeyloraSMP        | `veylorasmp.webp`    |
 
-Strassburger Pflegedienst nutzt vorerst einen Ausschnitt der Startseite. Die
-Vorschauen füllen ihre Bildfläche auch bei unterschiedlichen Seitenverhältnissen.
+Die Vorschauen füllen ihre Bildfläche auch bei unterschiedlichen Seitenverhältnissen.
 
 ## Bild austauschen / neu aufnehmen
 - **Full-Page** aufnehmen (ganze Seite): Chrome DevTools → `Cmd+Shift+P` →
