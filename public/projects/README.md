@@ -12,6 +12,7 @@ Erwartete Dateinamen (genau so, sonst greift der Gradient-Fallback):
 | Strassburger Pflegedienst | `strassburger-pflegedienst.webp` |
 | DIZZY             | `dizzy.webp`         |
 | VeyloraSMP        | `veylorasmp.webp`    |
+| Romantik Apartments | `romantik-apartments.webp` |
 
 Die Vorschauen füllen ihre Bildfläche auch bei unterschiedlichen Seitenverhältnissen.
 

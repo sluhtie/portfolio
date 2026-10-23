@@ -142,6 +142,21 @@ export const projects: Project[] = [
     url: "https://veylorasmp.net/",
     image: "/projects/veylorasmp.webp",
   },
+  {
+    id: "romantik-apartments",
+    index: "08",
+    title: "Romantik Apartments",
+    status: "live",
+    category: { en: "Hospitality & Booking", de: "Hospitality & Buchung" },
+    description: {
+      en: "An elegant website for nine individually designed holiday apartments in a historic Leipzig townhouse — warm gold accents, classic serif typography and a direct line to booking requests.",
+      de: "Eine elegante Website für neun individuell gestaltete Ferienapartments in einem historischen Leipziger Altbau — warme Goldakzente, klassische Serifen-Typografie und ein direkter Weg zur Buchungsanfrage.",
+    },
+    tags: ["Web Design", "Booking", "Responsive"],
+    accent: "#d4a94c",
+    url: "https://romantik-apartment.de",
+    image: "/projects/romantik-apartments.webp",
+  },
 ];
 
 export const services = [
