@@ -5,6 +5,9 @@ import { startScroll, stopScroll } from "./lib/scroll";
 import { Preloader } from "./components/Preloader";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { Navbar } from "./components/Navbar";
+import { WebGLWorld } from "./components/WebGLWorld";
+import { Cursor } from "./components/Cursor";
+import { SectionHUD } from "./components/SectionHUD";
 
 import { Hero } from "./sections/Hero";
 import { MarqueeStrip } from "./sections/MarqueeStrip";
@@ -48,10 +51,13 @@ export default function App() {
   return (
     <div className="grain relative">
       <Preloader onComplete={handleLoaded} />
+      <WebGLWorld ready={ready} />
+      <Cursor />
       <ScrollProgress />
       <Navbar ready={ready} />
+      <SectionHUD ready={ready} />
 
-      <main>
+      <main className="relative z-10">
         <Hero ready={ready} />
         <MarqueeStrip />
         <About />

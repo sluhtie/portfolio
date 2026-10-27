@@ -4,6 +4,7 @@ import { useLang } from "../i18n/LanguageContext";
 import { profile } from "../i18n/content";
 import { LanguageToggle } from "./LanguageToggle";
 import { Magnetic } from "./Magnetic";
+import { Scramble } from "./KineticText";
 import { scrollTo, startScroll, stopScroll } from "../lib/scroll";
 import { EASE } from "../lib/motion";
 
@@ -63,8 +64,9 @@ export function Navbar({ ready }: { ready: boolean }) {
             <button
               data-cursor
               onClick={() => scrollTo(0)}
-              className="font-display text-lg font-semibold tracking-tight"
+              className="group flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight"
             >
+              <span aria-hidden="true" className="brand-orb" />
               {profile.brand}
               <span className="text-accent">.</span>
             </button>
@@ -76,9 +78,9 @@ export function Navbar({ ready }: { ready: boolean }) {
                   <button
                     data-cursor
                     onClick={() => go(l.id)}
-                    className="link-underline text-sm text-muted transition-colors hover:text-ink"
+                    className="link-underline font-mono text-xs uppercase tracking-[0.18em] text-muted transition-colors hover:text-ink"
                   >
-                    {l.label}
+                    <Scramble text={l.label} />
                   </button>
                 </li>
               ))}
@@ -130,7 +132,7 @@ export function Navbar({ ready }: { ready: boolean }) {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 flex flex-col justify-center bg-bg-soft px-8 md:hidden"
+            className="mobile-menu fixed inset-0 z-40 flex flex-col justify-center px-8 md:hidden"
             initial={{ clipPath: "inset(0 0 100% 0)" }}
             animate={{ clipPath: "inset(0 0 0% 0)" }}
             exit={{ clipPath: "inset(0 0 100% 0)" }}
@@ -147,8 +149,9 @@ export function Navbar({ ready }: { ready: boolean }) {
                 >
                   <button
                     onClick={() => go(l.id)}
-                    className="font-display text-5xl font-medium"
+                    className="flex items-baseline gap-4 font-display text-6xl font-semibold uppercase tracking-tight"
                   >
+                    <span className="font-mono text-xs font-normal text-accent">0{i + 1}</span>
                     {l.label}
                   </button>
                 </motion.li>

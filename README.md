@@ -9,8 +9,10 @@ Smooth Scrolling, Scroll- & Hover-Animationen und einem Premium-Dark-UI.
 - **Tailwind CSS v4** (Design-Tokens in `src/index.css` unter `@theme`)
 - **Framer Motion** – Reveals, Hover, Micro-Interactions, Slider
 - **GSAP + ScrollTrigger** – gepinnte horizontale Projekt-Galerie
-- **Lenis** – Smooth Scroll (mit GSAP synchronisiert)
-- **Custom WebGL-Shader** – Aurora-Hintergrund im Hero (kein 3D-Framework, CSS-Fallback)
+- **three.js** – seitenweite WebGL-Welt (flüssiger Orb, Orbit-Ringe, Partikel,
+  Glow-Feld im Visitenkarten-Look) + 3D-Visitenkarte im About-Bereich.
+  Lazy geladen, mit CSS-Fallback ohne WebGL.
+- Natives Scrolling (kein Scroll-Hijacking)
 
 ## Befehle
 
@@ -52,8 +54,10 @@ definiert:
 ```
 
 Die Fonts kommen via Fontshare (CDN, kostenlos) — siehe `<link>` in `index.html`.
-Den Aurora-Shader (Farben/Geschwindigkeit) findest du in
-`src/components/AuroraBackground.tsx` im `FRAG`-Shader.
+Die Farbpalette der WebGL-Szenen liegt in `src/gl/noise.ts` (`PALETTE`). Wo der
+Orb in welchem Abschnitt sitzt (Position, Größe, Intensität), steuern
+`DESKTOP_STATES` / `MOBILE_STATES` in `src/gl/World.ts`. Die 3D-Visitenkarte
+(Vorder- und Rückseite werden per Canvas gezeichnet) steckt in `src/gl/Card.ts`.
 
 ## Struktur
 
@@ -72,10 +76,13 @@ Dockerfile · docker-compose.yml   Self-Hosting (Docker / Dokploy)
 
 ## Features
 
-Preloader · magnetische Buttons · Masken-Text-Reveals ·
-Word-by-Word-Reveals · Scroll-Parallax · animierte Counter · gepinnte horizontale
-Galerie · Marquees · Akkordeon-Services · Testimonial-Slider · Scroll-Progress ·
-DE/EN-Umschalter · responsive · `prefers-reduced-motion`-freundlich.
+WebGL-Welt, die beim Scrollen zwischen Abschnitten „wandert" · 3D-Visitenkarte
+(Scroll-Spin, Maus-Tilt, Klick zum Drehen) · CW-Monogramm-Preloader mit
+Split-Curtain · 3D-Character-Reveals · Scroll-gescrubbtes Manifest ·
+Velocity-Marquees · gestapelte Sticky-Service-Karten mit animierten
+SVG-Illustrationen · gepinnte Coverflow-Projektgalerie mit Velocity-Skew ·
+Prozess-Timeline mit Fortschrittsschiene · Custom Cursor · Scramble-Text ·
+Kapitel-HUD · DE/EN-Umschalter · responsive · `prefers-reduced-motion`-freundlich.
 
 ## Self-Hosting (Docker / Dokploy)
 
@@ -111,5 +118,5 @@ docker compose up --build
 ## Barrierefreiheit / Performance
 
 - Respektiert `prefers-reduced-motion` (Animationen werden reduziert).
-- WebGL pausiert bei verstecktem Tab; DPR auf 1.5 gedeckelt.
+- WebGL pausiert bei verstecktem Tab bzw. außerhalb des Viewports; DPR gedeckelt.
 - Failsafes sorgen dafür, dass der Preloader nie hängen bleibt.

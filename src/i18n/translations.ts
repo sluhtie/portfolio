@@ -29,6 +29,7 @@ export const translations = {
         "I craft immersive, high-end websites where every pixel moves with purpose. Part developer, part designer, fully obsessed with the details.",
       scroll: "Scroll to explore",
       basedIn: "Based in Hamburg",
+      available: "Taking on new projects",
     },
     about: {
       eyebrow: "About",
@@ -36,6 +37,9 @@ export const translations = {
         "I help ambitious brands stand out with websites that feel less like pages and more like experiences.",
       body: "Based in Hamburg, I build modern, high-end websites and digital products for businesses and brands. My path runs from tinkering on game servers to React, TypeScript and AI-assisted workflows — and that same obsession with detail goes into everything I ship.",
       cta: "More about me",
+      highlight: ["brands", "experiences"],
+      cardHint: "Flip",
+      cardCaption: "Same card as in my wallet — scroll, hover or click to turn it.",
     },
     services: {
       eyebrow: "What I do",
@@ -49,6 +53,8 @@ export const translations = {
       view: "View project",
       all: "See all projects",
       status: { live: "Live", inProgress: "In progress" },
+      cursor: "Visit",
+      drag: "Keep scrolling",
     },
     process: {
       eyebrow: "How we'll work",
@@ -65,6 +71,7 @@ export const translations = {
       headingAccent: "unforgettable",
       body: "Have a project in mind, or just want to say hi? My inbox is always open.",
       cta: "Start a project",
+      write: "Write me",
       emailLabel: "Email",
       socialsLabel: "Socials",
       form: {
@@ -125,6 +132,7 @@ export const translations = {
         "Ich gestalte immersive, hochwertige Websites, bei denen sich jeder Pixel mit Absicht bewegt. Halb Entwickler, halb Designer, voll besessen von Details.",
       scroll: "Scrollen zum Entdecken",
       basedIn: "Ansässig in Hamburg",
+      available: "Offen für neue Projekte",
     },
     about: {
       eyebrow: "Über mich",
@@ -132,6 +140,9 @@ export const translations = {
         "Ich helfe ambitionierten Marken, sich abzuheben — mit Websites, die sich weniger wie Seiten und mehr wie Erlebnisse anfühlen.",
       body: "Aus Hamburg baue ich moderne, hochwertige Websites und digitale Produkte für Unternehmen und Marken. Mein Weg führt vom Basteln an Game-Servern zu React, TypeScript und KI-gestützten Workflows — und genau diese Detailverliebtheit steckt in allem, was ich abliefere.",
       cta: "Mehr über mich",
+      highlight: ["marken", "erlebnisse"],
+      cardHint: "Drehen",
+      cardCaption: "Dieselbe Karte wie in meinem Portemonnaie — scrollen, hovern oder klicken zum Drehen.",
     },
     services: {
       eyebrow: "Was ich mache",
@@ -145,6 +156,8 @@ export const translations = {
       view: "Projekt ansehen",
       all: "Alle Projekte",
       status: { live: "Live", inProgress: "In Arbeit" },
+      cursor: "Ansehen",
+      drag: "Weiter scrollen",
     },
     process: {
       eyebrow: "Wie wir arbeiten",
@@ -161,6 +174,7 @@ export const translations = {
       headingAccent: "Unvergessliches bauen",
       body: "Du hast ein Projekt im Kopf oder willst einfach Hallo sagen? Mein Postfach ist immer offen.",
       cta: "Projekt starten",
+      write: "Schreib mir",
       emailLabel: "E-Mail",
       socialsLabel: "Social Media",
       form: {
