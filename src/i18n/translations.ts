@@ -89,6 +89,8 @@ export const translations = {
         messagePlaceholder: "Tell me a little about your project…",
         submit: "Send message",
         linkedIn: "Or message me on LinkedIn",
+        privacyNote: "I only use your details to answer your message. More in the",
+        privacyLink: "privacy policy",
         sending: "Sending…",
         successTitle: "Message sent — thank you!",
         successBody: "I'll get back to you within 1–2 working days.",
@@ -107,8 +109,11 @@ export const translations = {
       backToTop: "Back to top",
       rights: "All rights reserved.",
       built: "Designed & built with care.",
+      imprint: "Imprint",
+      privacy: "Privacy",
     },
     lang: { switchTo: "DE", label: "Language" },
+    legal: { back: "Back to the site" },
   },
 
   de: {
@@ -196,6 +201,8 @@ export const translations = {
         messagePlaceholder: "Erzähl mir kurz von deinem Projekt…",
         submit: "Nachricht senden",
         linkedIn: "Oder schreib mir auf LinkedIn",
+        privacyNote: "Deine Angaben nutze ich nur, um dir zu antworten. Mehr dazu in der",
+        privacyLink: "Datenschutzerklärung",
         sending: "Wird gesendet…",
         successTitle: "Nachricht gesendet — danke!",
         successBody: "Ich melde mich innerhalb von 1–2 Werktagen bei dir.",
@@ -214,8 +221,11 @@ export const translations = {
       backToTop: "Nach oben",
       rights: "Alle Rechte vorbehalten.",
       built: "Mit Sorgfalt gestaltet & gebaut.",
+      imprint: "Impressum",
+      privacy: "Datenschutz",
     },
     lang: { switchTo: "EN", label: "Sprache" },
+    legal: { back: "Zurück zur Seite" },
   },
 };
 

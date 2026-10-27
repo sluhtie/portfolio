@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "../i18n/LanguageContext";
 import { profile } from "../i18n/content";
 import { EASE } from "../lib/motion";
+import { legalHref } from "../lib/route";
 
 /**
  * Posts to `/api/contact`, handled by the Express server (server/index.js), which
@@ -206,6 +207,14 @@ export function ContactForm() {
               {status === "submitting" ? f.sending : f.submit}
               {status !== "submitting" && <span>→</span>}
             </button>
+
+            <p className="text-center text-xs text-muted">
+              {f.privacyNote}{" "}
+              <a href={legalHref.privacy} data-cursor className="link-underline text-ink">
+                {f.privacyLink}
+              </a>
+              .
+            </p>
           </motion.form>
         )}
       </AnimatePresence>

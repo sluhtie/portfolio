@@ -5,11 +5,18 @@ import { useClock } from "../lib/hooks";
 import { scrollTo } from "../lib/scroll";
 import { LanguageToggle } from "../components/LanguageToggle";
 import { EASE } from "../lib/motion";
+import { getLegalPage, legalHref } from "../lib/route";
 
 export function Footer() {
   const { t, tx } = useLang();
   const time = useClock(profile.timezone);
   const year = new Date().getFullYear();
+  // On the legal pages the sections don't exist, so links go back home instead.
+  const onHome = getLegalPage() === null;
+  const goTo = (target: string | 0) => {
+    if (onHome) scrollTo(target, { offset: target === 0 ? 0 : -20 });
+    else window.location.href = target === 0 ? "/" : `/${target}`;
+  };
 
   const links = [
     { id: "work", label: t.nav.work },
@@ -24,7 +31,7 @@ export function Footer() {
         {/* big brand mark — letters rise in and react on hover */}
         <button
           data-cursor
-          onClick={() => scrollTo(0)}
+          onClick={() => goTo(0)}
           aria-label={`${profile.brand} — ${t.footer.backToTop}`}
           className="footer-brand flex w-full justify-between font-display text-[clamp(3rem,14.5vw,15rem)] font-semibold leading-[0.9]"
           style={{ ["--n" as string]: profile.brand.length }}
@@ -62,7 +69,7 @@ export function Footer() {
                 <li key={l.id}>
                   <button
                     data-cursor
-                    onClick={() => scrollTo(`#${l.id}`, { offset: -20 })}
+                    onClick={() => goTo(`#${l.id}`)}
                     className="link-underline text-muted transition-colors hover:text-ink"
                   >
                     {l.label}
@@ -102,7 +109,15 @@ export function Footer() {
           <span>
             © {year} {profile.name}. {t.footer.rights}
           </span>
-          <span>{t.footer.built}</span>
+          <span className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <span>{t.footer.built}</span>
+            <a href={legalHref.imprint} data-cursor className="link-underline transition-colors hover:text-ink">
+              {t.footer.imprint}
+            </a>
+            <a href={legalHref.privacy} data-cursor className="link-underline transition-colors hover:text-ink">
+              {t.footer.privacy}
+            </a>
+          </span>
           <button
             data-cursor
             onClick={() => scrollTo(0)}
