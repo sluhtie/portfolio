@@ -301,13 +301,13 @@ export const marqueeWords = [
  */
 export const legal = {
   name: profile.name,
-  street: "[Straße und Hausnummer]",
-  postalCode: "[PLZ]",
+  street: "Grandweg 122c",
+  postalCode: "22529",
   city: "Hamburg",
   country: { en: "Germany", de: "Deutschland" },
   email: profile.email,
   /** optional — shown only if set */
-  phone: "",
+  phone: "+49 1515 1617500",
   /** optional — USt-IdNr. if you have one (§ 27a UStG) */
   vatId: "",
   /** hosting provider the VM is rented from (processor under Art. 28 GDPR) */
@@ -316,9 +316,9 @@ export const legal = {
     address: "Rua Daniel Guerreiro Joao 4 4AB, 8125-598 Quarteira, Portugal",
     url: "https://novacloud-hosting.com",
     /** where the VM physically runs — NovaCloud offers Frankfurt, Nuremberg, Eygelshoven (NL) */
-    location: { en: "[Frankfurt am Main], Germany", de: "[Frankfurt am Main], Deutschland" },
+    location: { en: "Frankfurt am Main, Germany", de: "Frankfurt am Main, Deutschland" },
   },
   /** how long the reverse proxy / server keeps access logs */
-  logRetentionDays: "[14]",
+  logRetentionDays: "14",
   updated: { en: "October 2026", de: "Oktober 2026" },
 };

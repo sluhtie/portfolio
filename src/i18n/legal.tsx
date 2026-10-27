@@ -327,7 +327,7 @@ function privacy(locale: Locale): LegalDoc {
             {de
               ? "Die E-Mails werden über useSend versendet, das ich selbst auf meinem Server betreibe. useSend stellt die Nachrichten über Amazon Simple Email Service (SES) der Amazon Web Services EMEA SARL, 38 Avenue John F. Kennedy, L-1855 Luxemburg, zu. Ich nutze dafür die AWS-Region "
               : "Emails are sent via useSend, which I run myself on my server. useSend delivers messages through Amazon Simple Email Service (SES), provided by Amazon Web Services EMEA SARL, 38 Avenue John F. Kennedy, L-1855 Luxembourg. I use the AWS region "}
-            <V v="[eu-central-1 (Frankfurt)]" />
+            eu-central-1 (Frankfurt)
             {de
               ? ". Mit AWS besteht ein Auftragsverarbeitungsvertrag nach Art. 28 DSGVO. Da AWS einen US-Mutterkonzern hat, ist ein Zugriff aus den USA nicht völlig auszuschließen; AWS ist unter dem EU-US Data Privacy Framework zertifiziert, zusätzlich gelten die EU-Standardvertragsklauseln."
               : ". A data processing agreement under Art. 28 GDPR is in place with AWS. As AWS has a US parent company, access from the US cannot be entirely ruled out; AWS is certified under the EU-US Data Privacy Framework and the EU Standard Contractual Clauses also apply."}
