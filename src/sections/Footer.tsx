@@ -1,8 +1,10 @@
+import { motion } from "framer-motion";
 import { useLang } from "../i18n/LanguageContext";
 import { profile } from "../i18n/content";
 import { useClock } from "../lib/hooks";
 import { scrollTo } from "../lib/scroll";
 import { LanguageToggle } from "../components/LanguageToggle";
+import { EASE } from "../lib/motion";
 
 export function Footer() {
   const { t, tx } = useLang();
@@ -17,21 +19,38 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-line bg-bg-soft">
-      <div className="container-x py-16 md:py-20">
-        {/* big brand mark */}
+    <footer className="footer relative z-10 overflow-hidden border-t border-line">
+      <div className="container-x py-12 md:py-20">
+        {/* big brand mark — letters rise in and react on hover */}
         <button
           data-cursor
           onClick={() => scrollTo(0)}
-          className="block w-full text-left font-display text-[clamp(3.5rem,16vw,15rem)] font-semibold leading-none gradient-text"
+          aria-label={`${profile.brand} — ${t.footer.backToTop}`}
+          className="footer-brand flex w-full justify-between font-display text-[clamp(3rem,14.5vw,15rem)] font-semibold leading-[0.9]"
+          style={{ ["--n" as string]: profile.brand.length }}
         >
-          {profile.brand}
+          {Array.from(profile.brand).map((ch, i) => (
+            <motion.span
+              key={i}
+              aria-hidden="true"
+              className="inline-block"
+              initial={{ y: "60%", opacity: 0 }}
+              whileInView={{ y: "0%", opacity: 1 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1, ease: EASE, delay: i * 0.05 }}
+            >
+              {/* inner span owns the hover transform; framer owns the outer one */}
+              <span className="footer-letter inline-block" data-ch={ch} style={{ ["--i" as string]: i }}>
+                {ch}
+              </span>
+            </motion.span>
+          ))}
         </button>
 
         <div className="mt-12 grid grid-cols-2 gap-10 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <p className="max-w-xs text-sm text-muted">{t.footer.tagline}</p>
-            <div className="mt-6">
+            <div className="mt-6 w-fit">
               <LanguageToggle />
             </div>
           </div>

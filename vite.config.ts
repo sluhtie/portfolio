@@ -9,4 +9,13 @@ export default defineConfig({
     host: true,
     port: 5173,
   },
+  build: {
+    // three.js is lazy-loaded in its own chunk; it's large but off the critical path.
+    chunkSizeWarningLimit: 700,
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => (id.includes("node_modules/three") ? "three" : undefined),
+      },
+    },
+  },
 });
