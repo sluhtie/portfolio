@@ -11,6 +11,9 @@ export const profile = {
   brand: "CWCODES",
   role: { en: "Creative Developer & Designer", de: "Creative Developer & Designer" },
   email: "connor@cwcodes.de",
+  /** Shown on the 3D business card and in the shared contact card. Empty → hidden. */
+  phone: "+49 151 5161 7500",
+  website: "https://www.cwcodes.de",
   location: { en: "Hamburg, Germany", de: "Hamburg, Deutschland" },
   timezone: "Europe/Berlin",
   available: { en: "Available for projects", de: "Verfügbar für Projekte" },
@@ -241,11 +244,16 @@ export const processSteps = [
   },
 ];
 
-export const stats = [
-  { value: 60, suffix: "+", label: { en: "Projects shipped", de: "Projekte gelauncht" } },
-  { value: 8, suffix: "", label: { en: "Years of craft", de: "Jahre Erfahrung" } },
-  { value: 12, suffix: "", label: { en: "Awards & features", de: "Awards & Features" } },
-  { value: 100, suffix: "%", label: { en: "Client return rate", de: "Wiederkehrende Kunden" } },
+/** Tools shown in the About section's toolbox. */
+export const toolbox = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Tailwind CSS",
+  "Node.js",
+  "Docker",
+  "Figma",
+  "GSAP",
 ];
 
 export const testimonials = [

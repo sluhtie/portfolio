@@ -29,8 +29,8 @@ export function Process() {
   }, []);
 
   return (
-    <section id="process" className="container-x relative z-10 py-24 md:py-40">
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
+    <section id="process" className="container-x relative z-10 py-16 md:py-28 lg:py-40">
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-16">
         {/* sticky heading + giant step counter */}
         <div className="md:col-span-5">
           <div className="md:sticky md:top-28">
@@ -80,7 +80,7 @@ export function Process() {
                 key={step.num}
                 ref={(el) => (stepRefs.current[i] = el)}
                 data-index={i}
-                className="relative pb-16 pl-12 last:pb-0 md:pb-24 md:pl-16"
+                className="relative pb-10 pl-12 last:pb-0 md:pb-16 md:pl-16 lg:pb-24"
               >
                 <span
                   aria-hidden="true"

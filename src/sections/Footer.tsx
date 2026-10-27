@@ -20,7 +20,7 @@ export function Footer() {
 
   return (
     <footer className="footer relative z-10 overflow-hidden border-t border-line">
-      <div className="container-x py-16 md:py-20">
+      <div className="container-x py-12 md:py-20">
         {/* big brand mark — letters rise in and react on hover */}
         <button
           data-cursor

@@ -879,3 +879,15 @@ html.has-cursor textarea {
   right: calc(clamp(1.25rem, 5vw, 5rem) / 2);
   transform: translateX(50%);
 }
+
+.toolbox-chip {
+  transition:
+    border-color 0.4s,
+    color 0.4s,
+    background 0.4s;
+}
+.toolbox-chip:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: rgba(204, 255, 0, 0.05);
+}

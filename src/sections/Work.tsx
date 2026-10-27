@@ -121,10 +121,62 @@ function ProjectCard({ project, total }: { project: Project; total: number }) {
   );
 }
 
+/** Phones and tablets: a native swipe carousel instead of one tall card per project. */
+function SwipeGallery() {
+  const { t } = useLang();
+  const railRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const [current, setCurrent] = useState(1);
+
+  const onScroll = () => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const max = rail.scrollWidth - rail.clientWidth;
+    const p = max > 0 ? rail.scrollLeft / max : 0;
+    if (barRef.current) barRef.current.style.transform = `scaleX(${Math.max(0.04, p)})`;
+    setCurrent(Math.min(projects.length, Math.round(p * (projects.length - 1)) + 1));
+  };
+
+  return (
+    <motion.div
+      className="mt-10"
+      initial={{ opacity: 0, x: 60 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 1, ease: EASE }}
+    >
+      <div
+        ref={railRef}
+        onScroll={onScroll}
+        className="no-scrollbar -mx-[clamp(1.25rem,5vw,5rem)] flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-[clamp(1.25rem,5vw,5rem)] px-[clamp(1.25rem,5vw,5rem)] pb-2"
+      >
+        {projects.map((p) => (
+          <div key={p.id} className="h-[34rem] max-h-[78svh] min-h-[28rem] w-[min(84vw,26rem)] shrink-0 snap-start">
+            <ProjectCard project={p} total={projects.length} />
+          </div>
+        ))}
+      </div>
+      <div className="mt-6 flex items-center gap-4">
+        <span className="font-mono text-xs tabular-nums tracking-widest text-ink/80">
+          {String(current).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+        </span>
+        <div className="h-px flex-1 overflow-hidden bg-line">
+          <div ref={barRef} className="h-full origin-left scale-x-[0.04] bg-gradient-to-r from-violet via-accent to-teal" />
+        </div>
+        <span className="text-xs uppercase tracking-[0.2em] text-muted">{t.work.swipe}</span>
+      </div>
+      <a href="#contact" data-cursor className="btn-primary mt-8 w-fit">
+        {t.work.all}
+        <span>→</span>
+      </a>
+    </motion.div>
+  );
+}
+
 export function Work() {
   const { t } = useLang();
   // Short windows need stacked cards to keep screenshots and copy visible.
-  const isDesktop = useMediaQuery("(min-width: 768px) and (min-height: 640px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px) and (min-height: 640px)");
   const pinRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
@@ -184,7 +236,7 @@ export function Work() {
   }, [isDesktop]);
 
   return (
-    <section id="work" className="relative z-10 py-24 md:py-0">
+    <section id="work" className="relative z-10 py-16 md:py-24 lg:py-0">
       {isDesktop ? (
         <div ref={pinRef} className="relative h-screen overflow-hidden">
           <div className="flex h-full items-center">
@@ -244,30 +296,13 @@ export function Work() {
             </Reveal>
             <span className="eyebrow">03</span>
           </div>
-          <h2 className="mt-5 font-display text-[clamp(3rem,13vw,6rem)] font-semibold uppercase leading-[0.88] tracking-[-0.035em]">
+          <h2 className="mt-5 font-display text-[clamp(2.8rem,12vw,6rem)] font-semibold uppercase leading-[0.88] tracking-[-0.035em]">
             <RevealLines lines={t.work.heading.split(" ")} />
           </h2>
           <Reveal delay={0.1}>
-            <p className="mt-6 max-w-xs text-balance text-muted">{t.work.subheading}</p>
+            <p className="mt-4 max-w-xs text-balance text-muted">{t.work.subheading}</p>
           </Reveal>
-          <div className="mt-12 flex flex-col gap-6">
-            {projects.map((p) => (
-              <motion.div
-                key={p.id}
-                className="h-[78svh] max-h-[44rem] min-h-[34rem]"
-                initial={{ opacity: 0, y: 60, scale: 0.94, clipPath: "inset(12% 6% 0% 6% round 24px)" }}
-                whileInView={{ opacity: 1, y: 0, scale: 1, clipPath: "inset(0% 0% 0% 0% round 24px)" }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 1, ease: EASE }}
-              >
-                <ProjectCard project={p} total={projects.length} />
-              </motion.div>
-            ))}
-            <a href="#contact" data-cursor className="btn-primary mt-2 w-fit">
-              {t.work.all}
-              <span>→</span>
-            </a>
-          </div>
+          <SwipeGallery />
         </div>
       )}
     </section>

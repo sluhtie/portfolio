@@ -34,7 +34,7 @@ const DESKTOP_STATES: Record<string, OrbState> = {
 
 const MOBILE_STATES: Record<string, OrbState> = {
   top: { x: 0, y: 0.1, scale: 0.42, alpha: 0.95, distort: 0.21, glow: 1, hue: 0.5 },
-  about: { x: 0.55, y: 0.55, scale: 0.28, alpha: 0.6, distort: 0.15, glow: 0.6, hue: 0.15 },
+  about: { x: 0.6, y: 0.62, scale: 0.24, alpha: 0.35, distort: 0.15, glow: 0.6, hue: 0.15 },
   services: { x: -0.6, y: 0.65, scale: 0.22, alpha: 0.5, distort: 0.28, glow: 0.45, hue: 0.85 },
   work: { x: 0, y: 0, scale: 0.9, alpha: 0.18, distort: 0.13, glow: 0.4, hue: 0.3 },
   process: { x: 0.55, y: 0.6, scale: 0.26, alpha: 0.5, distort: 0.21, glow: 0.5, hue: 0.7 },

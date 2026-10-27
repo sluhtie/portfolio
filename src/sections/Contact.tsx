@@ -9,7 +9,7 @@ export function Contact() {
   const { t, tx } = useLang();
 
   return (
-    <section id="contact" className="relative z-10 overflow-hidden py-28 md:py-44">
+    <section id="contact" className="relative z-10 overflow-hidden py-20 md:py-32 lg:py-44">
       <div className="container-x relative">
         {/* heading */}
         <div className="contact-heading mx-auto max-w-5xl text-center">
@@ -31,12 +31,12 @@ export function Contact() {
             <p className="mx-auto mt-8 max-w-md text-balance text-ink/70 md:text-lg">{t.contact.body}</p>
           </Reveal>
 
-          <Reveal delay={0.3} className="mt-12 flex justify-center">
+          <Reveal delay={0.3} className="mt-8 flex justify-center md:mt-12">
             <Magnetic strength={0.45}>
               <a
                 href={`mailto:${profile.email}`}
                 data-cursor
-                className="contact-blob group relative flex h-36 w-36 items-center justify-center rounded-full text-center font-display text-lg font-semibold text-bg md:h-44 md:w-44 md:text-xl"
+                className="contact-blob group relative flex h-28 w-28 items-center justify-center rounded-full text-center font-display text-base font-semibold text-bg md:h-44 md:w-44 md:text-xl"
               >
                 <span className="relative z-10 px-4 leading-tight">{t.contact.write}</span>
               </a>
@@ -45,7 +45,7 @@ export function Contact() {
         </div>
 
         {/* form + details */}
-        <div className="mt-20 grid grid-cols-1 gap-12 md:mt-28 md:grid-cols-12 md:gap-16">
+        <div className="mt-12 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-12 md:gap-12 lg:mt-28 lg:gap-16">
           <Reveal className="order-2 flex flex-col gap-10 md:order-1 md:col-span-5">
             <div>
               <span className="eyebrow">{t.contact.emailLabel}</span>

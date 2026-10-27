@@ -9,6 +9,7 @@ export type CardCopy = {
   email: string;
   site: string;
   brand: string;
+  phone: string;
 };
 
 const W = 1;
@@ -83,24 +84,42 @@ export function drawFront(copy: CardCopy) {
   glow(ctx, TEX_W * 0.9, TEX_H * 0.82, TEX_W * 0.6, "rgba(25,185,155,ALPHA)", 1);
   grain(ctx, 14);
 
-  squirclePath(ctx, TEX_W * 0.55, TEX_H * 0.44, TEX_W * 0.42, Math.PI / 4.6);
+  squirclePath(ctx, TEX_W * 0.55, TEX_H * 0.36, TEX_W * 0.36, Math.PI / 4.6);
   ctx.strokeStyle = "rgba(236,235,228,0.2)";
   ctx.lineWidth = 2;
   ctx.stroke();
 
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.font = `700 ${TEX_W * 0.27}px "Clash Display", "General Sans", sans-serif`;
-  ctx.fillStyle = "rgba(160,170,140,0.34)";
-  ctx.fillText("CW", TEX_W * 0.5, TEX_H * 0.49);
+  ctx.font = `700 ${TEX_W * 0.24}px "Clash Display", "General Sans", sans-serif`;
+  ctx.fillStyle = "rgba(160,170,140,0.36)";
+  ctx.fillText("CW", TEX_W * 0.5, TEX_H * 0.4);
 
-  ctx.font = `500 ${TEX_W * 0.034}px "General Sans", sans-serif`;
-  ctx.fillStyle = "rgba(236,235,228,0.78)";
+  // contact block, kept large enough to read on a phone
+  const pad = TEX_W * 0.075;
   ctx.textBaseline = "alphabetic";
   ctx.textAlign = "left";
-  ctx.fillText(copy.name, TEX_W * 0.06, TEX_H * 0.94);
+  ctx.font = `600 ${TEX_W * 0.062}px "Clash Display", "General Sans", sans-serif`;
+  ctx.fillStyle = "#ecebe4";
+  ctx.fillText(copy.name, pad, TEX_H * 0.705);
+  ctx.font = `500 ${TEX_W * 0.034}px "General Sans", sans-serif`;
+  ctx.fillStyle = "rgba(236,235,228,0.65)";
+  ctx.fillText(copy.role, pad, TEX_H * 0.748);
+
+  const rows = [copy.email, copy.site, copy.phone].filter(Boolean);
+  ctx.font = `500 ${TEX_W * 0.042}px "General Sans", sans-serif`;
+  rows.forEach((row, i) => {
+    const y = TEX_H * (0.82 + i * 0.05);
+    ctx.fillStyle = PALETTE.lime;
+    ctx.fillRect(pad, y - TEX_W * 0.014, TEX_W * 0.012, TEX_W * 0.012);
+    ctx.fillStyle = "rgba(236,235,228,0.88)";
+    ctx.fillText(row, pad + TEX_W * 0.032, y);
+  });
+
   ctx.textAlign = "right";
-  ctx.fillText(copy.location, TEX_W * 0.94, TEX_H * 0.94);
+  ctx.font = `500 ${TEX_W * 0.034}px "General Sans", sans-serif`;
+  ctx.fillStyle = "rgba(236,235,228,0.65)";
+  ctx.fillText(copy.location, TEX_W - pad, TEX_H * 0.705);
   return cv;
 }
 
@@ -158,6 +177,7 @@ export function drawBack(copy: CardCopy) {
   ctx.fillStyle = "rgba(236,235,228,0.55)";
   ctx.fillText(copy.site, pad, TEX_H * 0.91);
   ctx.textAlign = "right";
+  if (copy.phone) ctx.fillText(copy.phone, TEX_W - pad, TEX_H * 0.86);
   ctx.fillText(copy.location, TEX_W - pad, TEX_H * 0.91);
   return cv;
 }
@@ -297,8 +317,8 @@ export class Card3D {
     this.camera.aspect = w / h;
     // keep the whole card in frame on any aspect ratio
     const tan = Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2));
-    const fitH = (H * 1.18) / 2 / tan;
-    const fitW = (W * 1.5) / 2 / tan / this.camera.aspect;
+    const fitH = (H * 1.12) / 2 / tan;
+    const fitW = (W * 1.2) / 2 / tan / this.camera.aspect;
     this.camera.position.z = Math.max(fitH, fitW);
     this.camera.updateProjectionMatrix();
   };
@@ -330,15 +350,17 @@ export class Card3D {
     };
 
     this.flip += ((this.flipped ? 1 : 0) - this.flip) * 0.08;
-    const tx = this.hover ? pointer.y * 0.35 : 0;
-    const ty = this.hover ? pointer.x * 0.45 : 0;
+    const tx = this.hover ? pointer.y * 0.18 : 0;
+    const ty = this.hover ? pointer.x * 0.25 : 0;
     this.tiltX += (tx - this.tiltX) * 0.08;
     this.tiltY += (ty - this.tiltY) * 0.08;
 
-    const scrollSpin = -0.35 + sm(0.42, 0.78, p) * Math.PI + (p - 0.5) * 0.5;
-    this.group.rotation.y = scrollSpin + this.flip * Math.PI + this.tiltY;
-    this.group.rotation.x = -0.12 + (0.5 - p) * 0.35 - this.tiltX;
-    this.group.rotation.z = 0.06 + Math.sin(this.t * 0.6) * 0.03;
+    // Swings in as it enters the viewport, then rests facing the reader so
+    // the details stay legible; only hover tilt and flips move it after that.
+    const enter = 1 - sm(0.05, 0.38, p);
+    this.group.rotation.y = -0.7 * enter + this.flip * Math.PI + this.tiltY;
+    this.group.rotation.x = 0.25 * enter - this.tiltX;
+    this.group.rotation.z = 0;
     this.group.position.y = Math.sin(this.t * 0.9) * 0.03;
     this.mat.uniforms.uTilt.value = this.group.rotation.y + this.group.rotation.x;
 

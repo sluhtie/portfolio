@@ -4,7 +4,7 @@ import { marqueeWords } from "../i18n/content";
 export function MarqueeStrip() {
   const half = Math.ceil(marqueeWords.length / 2);
   return (
-    <section className="relative z-10 -rotate-2 py-16 md:py-24">
+    <section className="relative z-10 -rotate-2 py-10 md:py-24">
       <div className="marquee-band border-y border-line py-5 md:py-7">
         <VelocityMarquee
           items={marqueeWords}
