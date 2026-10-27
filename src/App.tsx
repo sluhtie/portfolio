@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { startScroll, stopScroll } from "./lib/scroll";
+import { scrollTo, startScroll, stopScroll } from "./lib/scroll";
 
 import { Preloader } from "./components/Preloader";
 import { ScrollProgress } from "./components/ScrollProgress";
@@ -17,8 +17,15 @@ import { Work } from "./sections/Work";
 import { Process } from "./sections/Process";
 import { Contact } from "./sections/Contact";
 import { Footer } from "./sections/Footer";
+import { LegalPage } from "./pages/LegalPage";
+import { getLegalPage } from "./lib/route";
 
 export default function App() {
+  const legalPage = getLegalPage();
+  return legalPage ? <LegalPage page={legalPage} /> : <Home />;
+}
+
+function Home() {
   const [ready, setReady] = useState(false);
   const readyRef = useRef(false);
 
@@ -29,6 +36,9 @@ export default function App() {
     startScroll();
     window.scrollTo(0, 0);
     requestAnimationFrame(() => ScrollTrigger.refresh());
+    // Arriving from a legal page via /#section — jump there once we're ready.
+    const hash = window.location.hash;
+    if (hash.length > 1) window.setTimeout(() => scrollTo(hash, { offset: -20 }), 300);
   }, []);
 
   useEffect(() => {

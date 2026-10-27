@@ -293,3 +293,32 @@ export const marqueeWords = [
   "Performance",
   "Maintenance",
 ];
+
+/**
+ * Legal details for Impressum & Datenschutzerklärung (src/i18n/legal.tsx).
+ * Values in [square brackets] are placeholders and render highlighted on the
+ * page until they're filled in. Leave optional fields as "" to hide them.
+ */
+export const legal = {
+  name: profile.name,
+  street: "[Straße und Hausnummer]",
+  postalCode: "[PLZ]",
+  city: "Hamburg",
+  country: { en: "Germany", de: "Deutschland" },
+  email: profile.email,
+  /** optional — shown only if set */
+  phone: "",
+  /** optional — USt-IdNr. if you have one (§ 27a UStG) */
+  vatId: "",
+  /** hosting provider the VM is rented from (processor under Art. 28 GDPR) */
+  host: {
+    name: "Tech Tide Portugal Unipessoal LDA (NovaCloud-Hosting)",
+    address: "Rua Daniel Guerreiro Joao 4 4AB, 8125-598 Quarteira, Portugal",
+    url: "https://novacloud-hosting.com",
+    /** where the VM physically runs — NovaCloud offers Frankfurt, Nuremberg, Eygelshoven (NL) */
+    location: { en: "[Frankfurt am Main], Germany", de: "[Frankfurt am Main], Deutschland" },
+  },
+  /** how long the reverse proxy / server keeps access logs */
+  logRetentionDays: "[14]",
+  updated: { en: "October 2026", de: "Oktober 2026" },
+};

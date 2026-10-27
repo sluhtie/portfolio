@@ -891,3 +891,75 @@ html.has-cursor textarea {
   color: var(--color-accent);
   background: rgba(204, 255, 0, 0.05);
 }
+
+/* ============================================================
+   LEGAL PAGES (Impressum / Datenschutz)
+   ============================================================ */
+.legal-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(42vw 42vw at 4% 0%, rgba(124, 92, 255, 0.28), transparent 70%),
+    radial-gradient(36vw 36vw at 62% 46%, rgba(204, 255, 0, 0.07), transparent 70%),
+    radial-gradient(44vw 44vw at 100% 100%, rgba(0, 224, 198, 0.18), transparent 70%);
+}
+
+.legal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+.legal-section {
+  display: grid;
+  gap: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-line);
+  color: rgba(236, 235, 228, 0.82);
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.legal-section h2 {
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+.legal-section ul {
+  display: grid;
+  gap: 0.6rem;
+  list-style: none;
+}
+.legal-section li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+.legal-section li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 10px rgba(204, 255, 0, 0.6);
+}
+.legal-link {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 0.25em;
+  transition: color 0.3s;
+}
+.legal-link:hover {
+  color: var(--color-accent);
+}
+/* unfilled placeholder from content.ts → hard to miss */
+.legal-ph {
+  padding: 0 0.35em;
+  border-radius: 0.35em;
+  background: rgba(204, 255, 0, 0.14);
+  color: var(--color-accent);
+  outline: 1px dashed rgba(204, 255, 0, 0.6);
+}
