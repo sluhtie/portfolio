@@ -2,10 +2,18 @@ import { useEffect, useRef, useState } from "react";
 import { attachInput } from "../lib/pointer";
 import type { World } from "../gl/World";
 
+/** WebGL with a real GPU behind it. Software renderers (SwiftShader, llvmpipe)
+ *  would run the shaders on the CPU and stall the main thread for seconds, so
+ *  those get the static CSS glow instead. */
 function hasWebGL() {
   try {
     const c = document.createElement("canvas");
-    return !!(c.getContext("webgl2") || c.getContext("webgl"));
+    const gl = (c.getContext("webgl2") || c.getContext("webgl")) as WebGLRenderingContext | null;
+    if (!gl) return false;
+    const info = gl.getExtension("WEBGL_debug_renderer_info");
+    const renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "";
+    gl.getExtension("WEBGL_lose_context")?.loseContext();
+    return !/swiftshader|llvmpipe|softpipe|software/i.test(renderer);
   } catch {
     return false;
   }
@@ -22,7 +30,8 @@ export function WebGLWorld({ ready }: { ready: boolean }) {
 
   useEffect(() => {
     attachInput();
-    if (!canvasRef.current || !hasWebGL()) {
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    if (!canvasRef.current || saveData || !hasWebGL()) {
       setFallback(true);
       return;
     }
@@ -30,20 +39,27 @@ export function WebGLWorld({ ready }: { ready: boolean }) {
     let disposed = false;
     let ro: ResizeObserver | undefined;
 
-    // three.js is the heaviest dependency — load it off the critical path.
-    import("../gl/World")
-      .then(({ World }) => {
-        if (disposed || !canvasRef.current) return;
-        const world = new World(canvasRef.current);
-        worldRef.current = world;
-        world.start();
-        ro = new ResizeObserver(() => world.measure());
-        ro.observe(document.body);
-      })
-      .catch(() => setFallback(true));
+    // three.js is the heaviest dependency — load it off the critical path, once
+    // the main thread is idle, so it never competes with the first paint.
+    const load = () =>
+      import("../gl/World")
+        .then(({ World }) => {
+          if (disposed || !canvasRef.current) return;
+          const world = new World(canvasRef.current);
+          worldRef.current = world;
+          world.start();
+          ro = new ResizeObserver(() => world.measure());
+          ro.observe(document.body);
+        })
+        .catch(() => setFallback(true));
+    const idle = window.requestIdleCallback
+      ? window.requestIdleCallback(load, { timeout: 1200 })
+      : window.setTimeout(load, 300);
 
     return () => {
       disposed = true;
+      if (window.cancelIdleCallback) window.cancelIdleCallback(idle);
+      else window.clearTimeout(idle);
       ro?.disconnect();
       worldRef.current?.dispose();
       worldRef.current = null;

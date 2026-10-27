@@ -210,7 +210,7 @@ export function ContactForm() {
 
             <p className="text-center text-xs text-muted">
               {f.privacyNote}{" "}
-              <a href={legalHref.privacy} data-cursor className="link-underline text-ink">
+              <a href={legalHref("privacy", locale)} data-cursor className="link-underline text-ink">
                 {f.privacyLink}
               </a>
               .

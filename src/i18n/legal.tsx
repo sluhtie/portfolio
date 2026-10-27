@@ -204,7 +204,7 @@ function privacy(locale: Locale): LegalDoc {
             {de
               ? "Weitere Angaben findest du im "
               : "More details are in the "}
-            <A href={legalHref.imprint}>Impressum</A>.
+            <A href={legalHref("imprint", locale)}>{de ? "Impressum" : "imprint"}</A>.
           </p>
         </>
       ),

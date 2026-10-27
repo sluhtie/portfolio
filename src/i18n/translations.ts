@@ -6,9 +6,9 @@ export type Locale = "en" | "de";
 export const translations = {
   en: {
     meta: {
-      title: "Connor Welge – Creative Developer & Designer in Hamburg | CWCODES",
+      title: "Web Designer & Developer in Hamburg | Connor Welge – CWCODES",
       description:
-        "CWCODES – Connor Welge builds modern, high-end websites & digital experiences for businesses and brands. Freelance web development & design from Hamburg.",
+        "Freelance web designer & developer in Hamburg. Connor Welge (CWCODES) builds fast, modern websites with Next.js & React – from concept to launch and care.",
     },
     nav: {
       work: "Work",
@@ -16,19 +16,20 @@ export const translations = {
       services: "Services",
       contact: "Contact",
       cta: "Let's talk",
+      menu: "Menu",
     },
     preloader: {
       tagline: "Creative Developer & Designer",
     },
     hero: {
-      eyebrow: "Creative Developer & Designer",
+      eyebrow: "Web Design & Development",
       lineOne: "Designing",
       lineTwo: "digital",
       lineThree: "experiences",
       intro:
         "I craft immersive, high-end websites where every pixel moves with purpose. Part developer, part designer, fully obsessed with the details.",
       scroll: "Scroll to explore",
-      basedIn: "Based in Hamburg",
+      basedIn: "Connor Welge · Hamburg",
       available: "Taking on new projects",
     },
     about: {
@@ -57,6 +58,7 @@ export const translations = {
       all: "See all projects",
       status: { live: "Live", inProgress: "In progress" },
       cursor: "Visit",
+      screenshot: "Website screenshot",
       drag: "Keep scrolling",
       swipe: "Swipe",
     },
@@ -114,13 +116,22 @@ export const translations = {
     },
     lang: { switchTo: "DE", label: "Language" },
     legal: { back: "Back to the site" },
+    notFound: {
+      meta: {
+        title: "Page not found | CWCODES",
+        description: "This page doesn't exist (anymore). Head back to the CWCODES portfolio.",
+      },
+      eyebrow: "Error 404",
+      title: "Lost in space",
+      body: "This page doesn't exist, or it moved. The rest of the site is right where you left it.",
+    },
   },
 
   de: {
     meta: {
-      title: "Connor Welge – Webentwickler & Designer aus Hamburg | CWCODES",
+      title: "Webdesign & Webentwicklung Hamburg | Connor Welge – CWCODES",
       description:
-        "CWCODES – Connor Welge gestaltet moderne, hochwertige Websites & digitale Erlebnisse für Unternehmen und Marken. Freelance Webentwicklung & Webdesign aus Hamburg.",
+        "Webdesigner & Webentwickler aus Hamburg: Connor Welge (CWCODES) entwickelt schnelle, moderne Websites mit Next.js & React – von Konzept bis Betrieb.",
     },
     nav: {
       work: "Arbeiten",
@@ -128,19 +139,20 @@ export const translations = {
       services: "Leistungen",
       contact: "Kontakt",
       cta: "Schreib mir",
+      menu: "Menü",
     },
     preloader: {
       tagline: "Creative Developer & Designer",
     },
     hero: {
-      eyebrow: "Creative Developer & Designer",
+      eyebrow: "Webdesign & Webentwicklung",
       lineOne: "Digitale",
       lineTwo: "Erlebnisse",
       lineThree: "gestalten",
       intro:
         "Ich gestalte immersive, hochwertige Websites, bei denen sich jeder Pixel mit Absicht bewegt. Halb Entwickler, halb Designer, voll besessen von Details.",
       scroll: "Scrollen zum Entdecken",
-      basedIn: "Ansässig in Hamburg",
+      basedIn: "Connor Welge · Hamburg",
       available: "Offen für neue Projekte",
     },
     about: {
@@ -169,6 +181,7 @@ export const translations = {
       all: "Alle Projekte",
       status: { live: "Live", inProgress: "In Arbeit" },
       cursor: "Ansehen",
+      screenshot: "Screenshot der Website",
       drag: "Weiter scrollen",
       swipe: "Wischen",
     },
@@ -226,6 +239,15 @@ export const translations = {
     },
     lang: { switchTo: "EN", label: "Sprache" },
     legal: { back: "Zurück zur Seite" },
+    notFound: {
+      meta: {
+        title: "Seite nicht gefunden | CWCODES",
+        description: "Diese Seite gibt es nicht (mehr). Zurück zum Portfolio von CWCODES.",
+      },
+      eyebrow: "Fehler 404",
+      title: "Verlaufen",
+      body: "Diese Seite gibt es nicht oder sie ist umgezogen. Der Rest der Website ist genau da, wo du ihn verlassen hast.",
+    },
   },
 };
 

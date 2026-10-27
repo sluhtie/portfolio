@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { useLang } from "../i18n/LanguageContext";
 import type { Locale } from "../i18n/translations";
+import { pathFor } from "../lib/route";
 
 export function LanguageToggle({ className = "" }: { className?: string }) {
-  const { locale, setLocale, t } = useLang();
+  const { locale, setLocale, t, page } = useLang();
   const options: Locale[] = ["en", "de"];
 
   return (
@@ -15,11 +16,18 @@ export function LanguageToggle({ className = "" }: { className?: string }) {
       {options.map((l) => {
         const active = locale === l;
         return (
-          <button
+          // Real links so crawlers find both language versions; clicks swap in place.
+          <a
             key={l}
+            href={pathFor(page, l)}
+            hrefLang={l}
+            lang={l}
             data-cursor
-            onClick={() => setLocale(l)}
-            aria-pressed={active}
+            onClick={(e) => {
+              e.preventDefault();
+              setLocale(l);
+            }}
+            aria-current={active ? "true" : undefined}
             className="relative z-10 rounded-full px-3 py-1 text-[0.72rem] font-medium tracking-wider transition-colors duration-300"
             style={{ color: active ? "#08070a" : "var(--color-muted)" }}
           >
@@ -32,7 +40,7 @@ export function LanguageToggle({ className = "" }: { className?: string }) {
               />
             )}
             {l.toUpperCase()}
-          </button>
+          </a>
         );
       })}
     </div>

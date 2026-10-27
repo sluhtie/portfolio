@@ -635,11 +635,11 @@
 .project-shot {
   transform: scale(1.04);
   transition:
-    background-position 5s linear,
+    object-position 5s linear,
     transform 1.2s var(--ease-out-expo);
 }
 .project-card:hover .project-shot {
-  background-position: bottom;
+  object-position: bottom;
   transform: scale(1);
 }
 .project-sheen {
@@ -664,7 +664,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .project-card:hover .project-shot {
-    background-position: top;
+    object-position: top;
   }
 }
 

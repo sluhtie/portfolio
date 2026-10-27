@@ -59,9 +59,12 @@ function ProjectCard({ project, total }: { project: Project; total: number }) {
             }}
           />
           {project.image && (
-            <div
-              className="project-shot absolute inset-0 bg-cover bg-top bg-no-repeat"
-              style={{ backgroundImage: `url(${project.image})` }}
+            <img
+              src={project.image}
+              alt={`${t.work.screenshot}: ${project.title} – ${tx(project.category)}`}
+              loading="lazy"
+              decoding="async"
+              className="project-shot absolute inset-0 h-full w-full object-cover object-top"
             />
           )}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b0a0e] via-transparent to-transparent opacity-90" />

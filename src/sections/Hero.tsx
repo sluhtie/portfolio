@@ -33,10 +33,11 @@ export function Hero({ ready }: { ready: boolean }) {
     >
       {/* top meta row */}
       <div className="container-x relative z-10 flex items-start justify-between pt-28 text-xs text-muted sm:text-sm md:pt-32">
-        <motion.div {...fadeIn(0.5)} className="flex flex-col gap-1">
+        {/* The page's h1: who, what, where. The big statement below is visual. */}
+        <motion.h1 {...fadeIn(0.5)} className="flex flex-col gap-1 font-sans text-xs font-normal leading-[1.6] tracking-normal sm:text-sm">
           <span className="eyebrow !text-ink/80">{t.hero.eyebrow}</span>
           <span>{t.hero.basedIn}</span>
-        </motion.div>
+        </motion.h1>
         <motion.div {...fadeIn(0.6)} className="hidden flex-col items-end gap-1 text-right sm:flex">
           <span className="font-mono text-[0.7rem] tracking-widest text-ink/70">53.5511° N · 9.9937° E</span>
           <span className="inline-flex items-center gap-2">
@@ -54,7 +55,7 @@ export function Hero({ ready }: { ready: boolean }) {
         style={{ opacity: fade, y: lift, filter: blur }}
         className="container-x relative z-10 flex flex-1 flex-col justify-center py-10"
       >
-        <h1 className="hero-title font-display font-semibold uppercase leading-[0.86] tracking-[-0.035em]">
+        <p className="hero-title font-display font-semibold uppercase leading-[0.86] tracking-[-0.035em]">
           <motion.span style={{ x: xLeft }} className="block">
             <SplitChars text={t.hero.lineOne} show={ready} delay={0.25} />
           </motion.span>
@@ -73,7 +74,7 @@ export function Hero({ ready }: { ready: boolean }) {
           <motion.span style={{ x: xLeft }} className="hero-line-3 block">
             <SplitChars text={t.hero.lineThree} show={ready} delay={0.55} />
           </motion.span>
-        </h1>
+        </p>
       </motion.div>
 
       {/* bottom row */}
