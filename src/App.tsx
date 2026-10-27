@@ -18,11 +18,13 @@ import { Process } from "./sections/Process";
 import { Contact } from "./sections/Contact";
 import { Footer } from "./sections/Footer";
 import { LegalPage } from "./pages/LegalPage";
-import { getLegalPage } from "./lib/route";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import type { PageId } from "./lib/route";
 
-export default function App() {
-  const legalPage = getLegalPage();
-  return legalPage ? <LegalPage page={legalPage} /> : <Home />;
+export default function App({ page }: { page: PageId }) {
+  if (page === "home") return <Home />;
+  if (page === "notFound") return <NotFoundPage />;
+  return <LegalPage page={page} />;
 }
 
 function Home() {
@@ -67,7 +69,9 @@ function Home() {
       <Navbar ready={ready} />
       <SectionHUD ready={ready} />
 
-      <main className="relative z-10">
+      {/* clip, not hidden: keeps sticky/pinned sections working while the
+          tilted marquee and slide-in gallery can't widen the mobile viewport */}
+      <main className="relative z-10 overflow-x-clip">
         <Hero ready={ready} />
         <MarqueeStrip />
         <About />

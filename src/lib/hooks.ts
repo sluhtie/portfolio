@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 
 /** Reactive media query. */
 export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia(query).matches;
-  });
+  // Start false on every first render so the prerendered HTML and the
+  // hydrating client agree; the effect below syncs it immediately.
+  const [matches, setMatches] = useState(false);
 
   useEffect(() => {
     const mql = window.matchMedia(query);

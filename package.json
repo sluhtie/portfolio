@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "start": "node server/index.js"
   },
   "dependencies": {
+    "compression": "^1.8.2",
     "express": "^4.22.2",
     "framer-motion": "^11.11.17",
     "gsap": "^3.12.5",

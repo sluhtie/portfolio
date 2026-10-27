@@ -5,17 +5,20 @@ import { useClock } from "../lib/hooks";
 import { scrollTo } from "../lib/scroll";
 import { LanguageToggle } from "../components/LanguageToggle";
 import { EASE } from "../lib/motion";
-import { getLegalPage, legalHref } from "../lib/route";
+import { legalHref, pathFor } from "../lib/route";
 
 export function Footer() {
-  const { t, tx } = useLang();
+  const { t, tx, locale, page } = useLang();
   const time = useClock(profile.timezone);
   const year = new Date().getFullYear();
-  // On the legal pages the sections don't exist, so links go back home instead.
-  const onHome = getLegalPage() === null;
-  const goTo = (target: string | 0) => {
-    if (onHome) scrollTo(target, { offset: target === 0 ? 0 : -20 });
-    else window.location.href = target === 0 ? "/" : `/${target}`;
+  // On the other pages the sections don't exist, so links go back home instead.
+  const onHome = page === "home";
+  const home = pathFor("home", locale);
+  const hrefFor = (target: string | 0) => (onHome ? (target === 0 ? "#top" : target) : target === 0 ? home : `${home}${target}`);
+  const goTo = (e: React.MouseEvent, target: string | 0) => {
+    if (!onHome) return; // plain navigation
+    e.preventDefault();
+    scrollTo(target, { offset: target === 0 ? 0 : -20 });
   };
 
   const links = [
@@ -29,9 +32,10 @@ export function Footer() {
     <footer className="footer relative z-10 overflow-hidden border-t border-line">
       <div className="container-x py-12 md:py-20">
         {/* big brand mark — letters rise in and react on hover */}
-        <button
+        <a
+          href={hrefFor(0)}
           data-cursor
-          onClick={() => goTo(0)}
+          onClick={(e) => goTo(e, 0)}
           aria-label={`${profile.brand} — ${t.footer.backToTop}`}
           className="footer-brand flex w-full justify-between font-display text-[clamp(3rem,14.5vw,15rem)] font-semibold leading-[0.9]"
           style={{ ["--n" as string]: profile.brand.length }}
@@ -52,7 +56,7 @@ export function Footer() {
               </span>
             </motion.span>
           ))}
-        </button>
+        </a>
 
         <div className="mt-12 grid grid-cols-2 gap-10 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
@@ -67,13 +71,14 @@ export function Footer() {
             <ul className="mt-4 flex flex-col gap-2">
               {links.map((l) => (
                 <li key={l.id}>
-                  <button
+                  <a
+                    href={hrefFor(`#${l.id}`)}
                     data-cursor
-                    onClick={() => goTo(`#${l.id}`)}
+                    onClick={(e) => goTo(e, `#${l.id}`)}
                     className="link-underline text-muted transition-colors hover:text-ink"
                   >
                     {l.label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -111,10 +116,10 @@ export function Footer() {
           </span>
           <span className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <span>{t.footer.built}</span>
-            <a href={legalHref.imprint} data-cursor className="link-underline transition-colors hover:text-ink">
+            <a href={legalHref("imprint", locale)} data-cursor className="link-underline transition-colors hover:text-ink">
               {t.footer.imprint}
             </a>
-            <a href={legalHref.privacy} data-cursor className="link-underline transition-colors hover:text-ink">
+            <a href={legalHref("privacy", locale)} data-cursor className="link-underline transition-colors hover:text-ink">
               {t.footer.privacy}
             </a>
           </span>

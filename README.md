@@ -19,7 +19,7 @@ Smooth Scrolling, Scroll- & Hover-Animationen und einem Premium-Dark-UI.
 ```bash
 npm install      # Abhängigkeiten installieren
 npm run dev      # Dev-Server (http://localhost:5173)
-npm run build    # Production-Build nach dist/
+npm run build    # Production-Build nach dist/ (inkl. Prerendering aller Seiten)
 npm run preview  # Build lokal ansehen
 npm run typecheck
 ```
@@ -70,7 +70,10 @@ src/
   index.css     Design-System
 server/
   contact.js    Kontakt-/E-Mail-Logik (useSend)
-  index.js      Express-Server: liefert dist/ + /api/contact + /api/health
+  index.js      Express-Server: prerenderte Seiten, Redirects, 404, /api/contact, /api/health
+scripts/
+  prerender.mjs Build-Schritt: HTML pro Route + sitemap.xml
+  og/           Vorlage + Renderer für die Open-Graph-Bilder
 Dockerfile · docker-compose.yml   Self-Hosting (Docker / Dokploy)
 ```
 
@@ -107,7 +110,9 @@ docker compose up --build
 3. **Environment Variables**: `USESEND_API_KEY` (Pflicht), `USESEND_BASE_URL`
    (deine useSend-Instanz, z. B. `https://send.cwcodes.de`), optional
    `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` / `CONTACT_FROM_NAME` (siehe `.env.example`).
-4. **Domain** `cwcodes.de` zuweisen — Dokploy/Traefik übernimmt HTTPS.
+4. **Domain** `www.cwcodes.de` (und `cwcodes.de`) zuweisen — Dokploy/Traefik
+   übernimmt HTTPS. Mit `CANONICAL_HOST=www.cwcodes.de` leitet der Server
+   `cwcodes.de` per 301 auf `www` um (weglassen, falls Traefik das schon macht).
 5. Deploy. Health-Check läuft gegen `/api/health`.
 
 (Alternativ den „Compose"-Typ mit `docker-compose.yml` nutzen.)
@@ -115,8 +120,30 @@ docker compose up --build
 > Absender-Domain (`cwcodes.de`) in useSend verifizieren (DKIM/SPF-DNS-Records),
 > damit die Mails nicht im Spam landen.
 
+## SEO
+
+- **Eine URL pro Sprache:** Deutsch unter `/`, Englisch unter `/en`
+  (`/impressum` ↔ `/en/imprint`, `/datenschutz` ↔ `/en/privacy`), verknüpft per
+  `hreflang`. Wer einmal EN gewählt hat, landet beim nächsten Besuch auf `/en`.
+- **Prerendering:** `npm run build` rendert jede Seite zu fertigem HTML
+  (`scripts/prerender.mjs` + `src/entry-server.tsx`), der Browser hydriert nur
+  noch. Suchmaschinen und Link-Vorschauen sehen so den kompletten Text.
+- **Head-Tags** (Title, Description, Canonical, OG/Twitter, JSON-LD mit
+  `ProfessionalService` + `Person`) kommen zentral aus `src/lib/seo.ts`; die
+  Texte für die Startseite stehen unter `meta` in `src/i18n/translations.ts`.
+- **sitemap.xml** wird beim Build generiert (mit hreflang-Alternativen),
+  `robots.txt` liegt in `public/`.
+- **OG-Bilder** (`public/og-image.jpg` / `og-image-en.jpg`) werden aus
+  `scripts/og/og.html` gerendert: `npx -y -p playwright@1 node scripts/og/render.mjs`.
+- Unbekannte Pfade liefern eine echte **404** (`noindex`), alte/abweichende
+  Schreibweisen werden per 301 auf die kanonische URL umgeleitet.
+
 ## Barrierefreiheit / Performance
 
 - Respektiert `prefers-reduced-motion` (Animationen werden reduziert).
 - WebGL pausiert bei verstecktem Tab bzw. außerhalb des Viewports; DPR gedeckelt.
+- three.js lädt erst, wenn der Browser idle ist (Welt) bzw. die Visitenkarte in
+  Sichtweite kommt; bei aktivem Datensparmodus gibt's den statischen CSS-Glow.
+- Projekt-Screenshots sind echte `<img>` mit Alt-Text und `loading="lazy"`.
+- Der Server komprimiert Antworten (gzip) und cached gehashte Assets 1 Jahr.
 - Failsafes sorgen dafür, dass der Preloader nie hängen bleibt.

@@ -60,40 +60,53 @@ export function BusinessCard({ className = "" }: { className?: string }) {
       raf = requestAnimationFrame(track);
     };
 
-    import("../gl/Card")
-      .then(async ({ Card3D }) => {
-        if (disposed) return;
-        let card: Card3D;
-        try {
-          card = new Card3D(canvas);
-        } catch {
-          setFailed(true);
-          return;
-        }
-        cardRef.current = card;
-        try {
-          await Promise.all([
-            document.fonts.load('700 120px "Clash Display"'),
-            document.fonts.load('500 30px "General Sans"'),
-          ]);
-        } catch {
-          /* draw with fallbacks */
-        }
-        if (disposed) return;
-        card.setCopy(copyRef.current);
-        ro = new ResizeObserver(() => card.resize());
-        ro.observe(wrap);
-        io = new IntersectionObserver(([entry]) => {
-          if (entry.isIntersecting) card.start();
-          else card.stop();
-        });
-        io.observe(wrap);
-        raf = requestAnimationFrame(track);
-      })
-      .catch(() => setFailed(true));
+    // Pull in three.js only when the card is about to scroll into view.
+    const near = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        near.disconnect();
+        load();
+      },
+      { rootMargin: "800px 0px" }
+    );
+    near.observe(wrap);
+
+    const load = () =>
+      import("../gl/Card")
+        .then(async ({ Card3D }) => {
+          if (disposed) return;
+          let card: Card3D;
+          try {
+            card = new Card3D(canvas);
+          } catch {
+            setFailed(true);
+            return;
+          }
+          cardRef.current = card;
+          try {
+            await Promise.all([
+              document.fonts.load('700 120px "Clash Display"'),
+              document.fonts.load('500 30px "General Sans"'),
+            ]);
+          } catch {
+            /* draw with fallbacks */
+          }
+          if (disposed) return;
+          card.setCopy(copyRef.current);
+          ro = new ResizeObserver(() => card.resize());
+          ro.observe(wrap);
+          io = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) card.start();
+            else card.stop();
+          });
+          io.observe(wrap);
+          raf = requestAnimationFrame(track);
+        })
+        .catch(() => setFailed(true));
 
     return () => {
       disposed = true;
+      near.disconnect();
       cancelAnimationFrame(raf);
       io?.disconnect();
       ro?.disconnect();

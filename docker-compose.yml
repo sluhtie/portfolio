@@ -17,6 +17,7 @@ services:
       CONTACT_TO_EMAIL: ${CONTACT_TO_EMAIL:-connor@cwcodes.de}
       CONTACT_FROM_EMAIL: ${CONTACT_FROM_EMAIL:-connor@cwcodes.de}
       CONTACT_FROM_NAME: ${CONTACT_FROM_NAME:-CWCODES}
+      CANONICAL_HOST: ${CANONICAL_HOST:-}
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
       interval: 30s

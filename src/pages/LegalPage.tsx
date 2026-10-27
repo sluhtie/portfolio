@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useLang } from "../i18n/LanguageContext";
 import { profile } from "../i18n/content";
 import { getLegalDoc } from "../i18n/legal";
-import { legalHref, type LegalPageId } from "../lib/route";
+import { legalHref, pathFor, type LegalPageId } from "../lib/route";
 import { LanguageToggle } from "../components/LanguageToggle";
 import { Cursor } from "../components/Cursor";
 import { Footer } from "../sections/Footer";
@@ -18,17 +18,11 @@ export function LegalPage({ page }: { page: LegalPageId }) {
   const doc = getLegalDoc(page, locale);
   const other: LegalPageId = page === "imprint" ? "privacy" : "imprint";
 
+  const home = pathFor("home", locale);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [page]);
-
-  // LanguageProvider's effect runs after ours and resets the title, so defer.
-  useEffect(() => {
-    const id = window.setTimeout(() => {
-      document.title = `${doc.title} | ${profile.brand}`;
-    }, 0);
-    return () => window.clearTimeout(id);
-  }, [doc.title]);
 
   return (
     <div className="grain relative">
@@ -38,7 +32,7 @@ export function LegalPage({ page }: { page: LegalPageId }) {
       <header className="relative z-20">
         <nav className="container-x flex items-center justify-between py-4">
           <a
-            href="/"
+            href={home}
             data-cursor
             className="group flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight"
           >
@@ -58,7 +52,7 @@ export function LegalPage({ page }: { page: LegalPageId }) {
             transition={{ duration: 1, ease: EASE }}
           >
             <a
-              href="/"
+              href={home}
               data-cursor
               className="link-underline font-mono text-xs uppercase tracking-[0.18em] text-muted transition-colors hover:text-ink"
             >
@@ -85,7 +79,7 @@ export function LegalPage({ page }: { page: LegalPageId }) {
               {profile.name} · {profile.brand}
             </span>
             <a
-              href={legalHref[other]}
+              href={legalHref(other, locale)}
               data-cursor
               className="link-underline flex items-center gap-2 text-ink"
             >

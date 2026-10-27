@@ -30,7 +30,8 @@ export function Navbar({ ready }: { ready: boolean }) {
     { id: "contact", label: t.nav.contact },
   ];
 
-  const go = (id: string) => {
+  const go = (id: string, e?: React.MouseEvent) => {
+    e?.preventDefault();
     setMenuOpen(false);
     startScroll();
     // wait a tick so the menu overlay starts closing first
@@ -61,27 +62,32 @@ export function Navbar({ ready }: { ready: boolean }) {
         >
           <nav className="container-x flex items-center justify-between py-4">
             {/* Brand */}
-            <button
+            <a
+              href="#top"
               data-cursor
-              onClick={() => scrollTo(0)}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollTo(0);
+              }}
               className="group flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight"
             >
               <span aria-hidden="true" className="brand-orb" />
               {profile.brand}
               <span className="text-accent">.</span>
-            </button>
+            </a>
 
             {/* Center links (desktop) */}
             <ul className="hidden items-center gap-9 md:flex">
               {links.map((l) => (
                 <li key={l.id}>
-                  <button
+                  <a
+                    href={`#${l.id}`}
                     data-cursor
-                    onClick={() => go(l.id)}
+                    onClick={(e) => go(l.id, e)}
                     className="link-underline font-mono text-xs uppercase tracking-[0.18em] text-muted transition-colors hover:text-ink"
                   >
                     <Scramble text={l.label} />
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -93,13 +99,14 @@ export function Navbar({ ready }: { ready: boolean }) {
                   the hiding because Magnetic forces display:inline-flex inline. */}
               <div className="hidden sm:block">
                 <Magnetic strength={0.4}>
-                  <button
+                  <a
+                    href="#contact"
                     data-cursor
-                    onClick={() => go("contact")}
+                    onClick={(e) => go("contact", e)}
                     className="btn-primary !py-2.5 !px-5 text-sm"
                   >
                     {t.nav.cta}
-                  </button>
+                  </a>
                 </Magnetic>
               </div>
 
@@ -107,7 +114,8 @@ export function Navbar({ ready }: { ready: boolean }) {
               <button
                 data-cursor
                 onClick={toggleMenu}
-                aria-label="Menu"
+                aria-label={t.nav.menu}
+                aria-expanded={menuOpen}
                 className="relative ml-1 flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
               >
                 <motion.span
@@ -147,13 +155,14 @@ export function Navbar({ ready }: { ready: boolean }) {
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: 0.15 + i * 0.07, duration: 0.6, ease: EASE }}
                 >
-                  <button
-                    onClick={() => go(l.id)}
+                  <a
+                    href={`#${l.id}`}
+                    onClick={(e) => go(l.id, e)}
                     className="flex items-baseline gap-4 font-display text-6xl font-semibold uppercase tracking-tight"
                   >
                     <span className="font-mono text-xs font-normal text-accent">0{i + 1}</span>
                     {l.label}
-                  </button>
+                  </a>
                 </motion.li>
               ))}
             </ul>

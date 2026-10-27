@@ -9,6 +9,11 @@ export default defineConfig({
     host: true,
     port: 5173,
   },
+  // Prerender build (scripts/prerender.mjs): bundle the libraries whose
+  // package entry points Node can't import directly.
+  ssr: {
+    noExternal: ["gsap", "framer-motion"],
+  },
   build: {
     // three.js is lazy-loaded in its own chunk; it's large but off the critical path.
     chunkSizeWarningLimit: 700,
