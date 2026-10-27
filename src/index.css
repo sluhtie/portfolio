@@ -726,18 +726,42 @@
     radial-gradient(40% 70% at 100% 100%, rgba(14, 143, 124, 0.3), transparent 70%),
     var(--color-bg-soft);
 }
+/* Letters carry a little padding so glyph overhangs aren't clipped by
+   background-clip. The brand gradient sits on a ::after copy that fades in,
+   sized to the whole word so it runs continuously across the letters. */
 .footer-letter {
+  position: relative;
+  padding: 0.04em 0.08em 0.1em;
+  margin: -0.04em -0.08em -0.1em;
   background: linear-gradient(180deg, var(--color-ink) 30%, rgba(236, 235, 228, 0.25));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  transition: transform 0.7s var(--ease-out-expo);
+  transition: transform 0.9s var(--ease-out-expo);
+  transition-delay: calc(var(--i) * 35ms);
 }
-.footer-brand:hover .footer-letter {
-  transform: translateY(calc(-8% * (1 + sin(var(--i) * 1rad))));
-  background: linear-gradient(100deg, var(--color-violet), var(--color-accent) 55%, var(--color-teal));
+.footer-letter::after {
+  content: attr(data-ch);
+  position: absolute;
+  inset: 0;
+  padding: inherit;
+  background: linear-gradient(100deg, var(--color-violet), var(--color-accent) 50%, var(--color-teal));
+  /* oklch keeps the violet → lime blend vivid instead of passing through grey */
+  background: linear-gradient(in oklch 100deg, var(--color-violet), var(--color-accent) 50%, var(--color-teal));
+  background-size: calc(var(--n) * 100%) 100%;
+  background-position: calc(var(--i) / (var(--n) - 1) * 100%) 0;
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  transition-delay: inherit;
+}
+.footer-brand:hover .footer-letter {
+  transform: translateY(-6%);
+}
+.footer-brand:hover .footer-letter::after {
+  opacity: 1;
 }
 
 /* loader glow */

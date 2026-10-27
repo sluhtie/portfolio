@@ -26,20 +26,23 @@ export function Footer() {
           data-cursor
           onClick={() => scrollTo(0)}
           aria-label={`${profile.brand} — ${t.footer.backToTop}`}
-          className="footer-brand flex w-full justify-between font-display text-[clamp(3.5rem,16.5vw,16rem)] font-semibold leading-[0.8] tracking-[-0.04em]"
+          className="footer-brand flex w-full justify-between font-display text-[clamp(3rem,14.5vw,15rem)] font-semibold leading-[0.9]"
+          style={{ ["--n" as string]: profile.brand.length }}
         >
           {Array.from(profile.brand).map((ch, i) => (
             <motion.span
               key={i}
               aria-hidden="true"
-              className="footer-letter inline-block"
-              style={{ ["--i" as string]: i }}
+              className="inline-block"
               initial={{ y: "60%", opacity: 0 }}
               whileInView={{ y: "0%", opacity: 1 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 1, ease: EASE, delay: i * 0.05 }}
             >
-              {ch}
+              {/* inner span owns the hover transform; framer owns the outer one */}
+              <span className="footer-letter inline-block" data-ch={ch} style={{ ["--i" as string]: i }}>
+                {ch}
+              </span>
             </motion.span>
           ))}
         </button>
