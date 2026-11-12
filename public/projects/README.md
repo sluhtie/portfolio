@@ -13,6 +13,8 @@ Erwartete Dateinamen (genau so, sonst greift der Gradient-Fallback):
 | DIZZY             | `dizzy.webp`         |
 | VeyloraSMP        | `veylorasmp.webp`    |
 | Romantik Apartments | `romantik-apartments.webp` |
+| MCServerlist      | `mc-serverlist.webp` |
+| shulker.studio    | `shulker-studio.webp` |
 
 Die Vorschauen füllen ihre Bildfläche auch bei unterschiedlichen Seitenverhältnissen.
 
